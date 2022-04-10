@@ -10,14 +10,15 @@ export default class Timestamp {
     endpoint: string,
     selectedEntity: string,
     theme: string,
-    columnName: string
+    columnName: string,
+    did: string
   ) => {
     unitsOfTime = String(unitsOfTime.toLowerCase());
     let generatedUnixTime = moment().subtract(inputNumber, unitsOfTime).unix();
 
     const URI = encodeURIComponent(endpoint);
     const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&f=_gt&i=${generatedUnixTime}&c=${columnName}`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&did=${did}&f=_gt&i=${generatedUnixTime}&c=${columnName}`;
   };
 
   public static currentFilter = (
@@ -25,14 +26,15 @@ export default class Timestamp {
     endpoint: string,
     selectedEntity: string,
     theme: string,
-    columnName: string
+    columnName: string,
+    did: string
   ) => {
     unitsOfTime = String(unitsOfTime.toLowerCase());
     let generatedUnixTime = moment().startOf(unitsOfTime).unix();
 
     const URI = encodeURIComponent(endpoint);
     const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&f=_gt&i=${generatedUnixTime}&c=${columnName}`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&did=${did}&f=_gt&i=${generatedUnixTime}&c=${columnName}`;
   };
 
   public static beforeFilter = (
@@ -40,13 +42,14 @@ export default class Timestamp {
     endpoint: string,
     selectedEntity: string,
     theme: string,
-    columnName: string
+    columnName: string,
+    did: string
   ) => {
     let generatedUnixTime = moment(date).unix();
 
     const URI = encodeURIComponent(endpoint);
     const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&f=_lt&i=${generatedUnixTime}&c=${columnName}`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&did=${did}&f=_lt&i=${generatedUnixTime}&c=${columnName}`;
   };
 
   public static afterFilter = (
@@ -54,13 +57,14 @@ export default class Timestamp {
     endpoint: string,
     selectedEntity: string,
     theme: string,
-    columnName: string
+    columnName: string,
+    did: string
   ) => {
     let generatedUnixTime = moment(date).endOf('day').unix();
 
     const URI = encodeURIComponent(endpoint);
     const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&f=_gt&i=${generatedUnixTime}&c=${columnName}`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&did=${did}&f=_gt&i=${generatedUnixTime}&c=${columnName}`;
   };
 
   public static onFilter = (
@@ -68,7 +72,8 @@ export default class Timestamp {
     endpoint: string,
     selectedEntity: string,
     theme: string,
-    columnName: string
+    columnName: string,
+    did: string
   ) => {
     let generatedUnixTime: string[] = [];
     let firstUnixTime = moment(date).startOf('day').unix();
@@ -78,7 +83,7 @@ export default class Timestamp {
 
     const URI = encodeURIComponent(endpoint);
     const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&f=_gte,_lte&i=${generatedUnixTime}&c=${columnName}`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&did=${did}&f=_gte,_lte&i=${generatedUnixTime}&c=${columnName}`;
   };
 
   public static isEmptyNotEmptyFilter = (
@@ -86,11 +91,12 @@ export default class Timestamp {
     endpoint: string,
     selectedEntity: string,
     theme: string,
-    columnName: string
+    columnName: string,
+    did: string
   ) => {
     const URI = encodeURIComponent(endpoint);
     const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&f=${appliedFilter}&i=null&c=${columnName}`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&did=${did}&f=${appliedFilter}&i=null&c=${columnName}`;
   };
 
   public static betweenFilter = (
@@ -98,7 +104,8 @@ export default class Timestamp {
     endpoint: string,
     selectedEntity: string,
     theme: string,
-    columnName: string
+    columnName: string,
+    did: string
   ) => {
     let generatedUnixTime: string[] = [];
     let firstUnixTime = moment(date[0]).startOf('day').unix();
@@ -108,6 +115,6 @@ export default class Timestamp {
 
     const URI = encodeURIComponent(endpoint);
     const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&f=_gte,_lte&i=${generatedUnixTime}&c=${columnName}`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&did=${did}&f=_gte,_lte&i=${generatedUnixTime}&c=${columnName}`;
   };
 }

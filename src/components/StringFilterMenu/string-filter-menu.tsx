@@ -79,7 +79,8 @@ const StringFilterMenu: React.FunctionComponent<
               attributeName,
               optionSelected,
               stringValue,
-              theme
+              theme,
+              parsed.did
             )
           }
         >

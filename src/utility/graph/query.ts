@@ -18,6 +18,26 @@ export const getAllEntities = gql`
   }
 `;
 
+export const getSubgraphNetworkId = gql`
+  query {
+    _meta {
+      deployment
+    }
+  }
+`;
+
+export const getNetworkName = (networkId: any) => {
+  return gql`
+    query {
+      indexingStatuses(subgraphs: ["${networkId}"]) {
+        chains {
+          network
+        }
+      }
+    }
+  `;
+};
+
 export const getAllAttributes = (entity: string) => {
   entity = Utility.getProperEntity(entity);
   return gql`

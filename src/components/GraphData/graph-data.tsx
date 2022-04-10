@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './graph-data.scss';
 import { useQuery } from '@apollo/client';
-import { getAllEntities } from '../../utility/graph/query';
+import { getAllEntities, getNetworkName } from '../../utility/graph/query';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Toolbar from '@mui/material/Toolbar';
 import { styled } from '@mui/material/styles';
@@ -50,6 +50,8 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
   const parsed = queryString.parse(location.search);
   let theme: any = parsed.th;
   let graphName: string | any = parsed.uri?.slice(parsed.uri?.lastIndexOf('/') + 1);
+  let did = String(parsed.did);
+  let subgraphNetworkName: string | any;
   if (parsed.uri) {
     graphName = humanizeString(graphName)?.toUpperCase();
   }
@@ -83,11 +85,20 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
       theme === label.LIGHT_THEME_LABEL ? label.DARK_THEME_LABEL : label.LIGHT_THEME_LABEL;
     dispatch(toggleTheme(newTheme));
     theme = newTheme;
-    window.location.href = `${urlLabels.BASE_URL}uri=${parsed.uri}&e=${parsed.e}&th=${theme}`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${parsed.uri}&e=${parsed.e}&th=${theme}&did=${did}`;
   };
   const handleToggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data: networkName } = useQuery(getNetworkName(did), {
+    context: { clientName: 'chain-network' },
+  });
+  if (networkName) {
+    subgraphNetworkName = networkName.indexingStatuses[0].chains[0].network.toUpperCase();
+  }
+
   const { data, error, loading } = useQuery(getAllEntities);
   let allEntities: string[];
   allEntities = [];
@@ -174,9 +185,35 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
                   />
                 </Tooltip>
               )}
+
+              <Box className="social-icon">
+                <a href={Constants.ROUTES.DISCORD} target="_blank" rel="noreferrer">
+                  <img
+                    src="https://d2yxqfr8upg55w.cloudfront.net/assets/img/discord.svg"
+                    alt="discord-logo"
+                    className="discord"
+                  />
+                </a>
+                <a href={Constants.ROUTES.TWITTER} target="_blank" rel="noreferrer">
+                  <img
+                    src="https://d2yxqfr8upg55w.cloudfront.net/assets/img/twitter.svg"
+                    alt="twitter-logo"
+                    className="twitter"
+                  />
+                </a>
+                <a href={Constants.ROUTES.MEDIUM} target="_blank" rel="noreferrer">
+                  <img
+                    src="https://d2yxqfr8upg55w.cloudfront.net/assets/img/medium.svg"
+                    alt="medium-logo"
+                    className="medium"
+                  />
+                </a>
+              </Box>
             </div>
 
-            <h2 className="graph-heading">{graphName}</h2>
+            <h2 className="graph-heading">
+              {graphName} ({subgraphNetworkName})
+            </h2>
 
             {/* <ExportButton /> */}
 

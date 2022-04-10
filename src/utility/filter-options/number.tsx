@@ -10,7 +10,8 @@ export const filterNumberIs = (
   selectedFilter: string,
   firstInputNumber: string,
   secondInputNumber: string,
-  theme: any
+  theme: any,
+  did: any
 ) => {
   let userInputValue = label.EMPTY;
   if (secondInputNumber === label.EMPTY) {
@@ -21,5 +22,5 @@ export const filterNumberIs = (
 
   const URI = encodeURIComponent(endpoint);
   const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
-  window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&f=${selectedFilter}&i=${userInputValue}&c=${columnName}`;
+  window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&did=${did}&f=${selectedFilter}&i=${userInputValue}&c=${columnName}`;
 };

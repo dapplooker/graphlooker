@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ErrorMessage from '../ErrorMessage/error-message';
 import { useQuery } from '@apollo/client';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllEntities } from '../../utility/graph/query';
+import { getAllEntities, getSubgraphNetworkId } from '../../utility/graph/query';
 import { setGraphEndpoint, setGraphEntity } from '../../redux/actions/endpoint-action';
 import { RouteComponentProps, withRouter, Redirect } from 'react-router-dom';
 import './home.scss';
@@ -20,6 +20,8 @@ const Home: React.FunctionComponent<RouteComponentProps<any>> = ({ history }) =>
   const dispatch = useDispatch();
   const urlRegex = /^(https:\/\/api\.|http:\/\/api\.)[a-zA-Z0-9\-_$]+\.[a-zA-Z]{2,5}/g;
   let isendpointCorrect = urlRegex.test(endpoint);
+  let firstEntity = commonLables.EMPTY;
+  let subgraphNetworkId = commonLables.EMPTY;
 
   const searchEndpoint = (e: any) => {
     e.preventDefault();
@@ -45,11 +47,22 @@ const Home: React.FunctionComponent<RouteComponentProps<any>> = ({ history }) =>
     if (error) {
     }
     if (data) {
-      const firstEntity = data.__schema.queryType.fields[0].name;
-      const url = encodeURIComponent(endpoint);
+      firstEntity = data.__schema.queryType.fields[0].name;
       dispatch(setGraphEntity(firstEntity));
-      return <Redirect push to={`explore?uri=${url}&e=${firstEntity}&th=${theme}`} />;
     }
+  }
+
+  const { data: networkIdData } = useQuery(getSubgraphNetworkId);
+  if (networkIdData && firstEntity !== commonLables.EMPTY) {
+    const url = encodeURIComponent(endpoint);
+    subgraphNetworkId = networkIdData._meta.deployment;
+    firstEntity = data.__schema.queryType.fields[0].name;
+    return (
+      <Redirect
+        push
+        to={`explore?uri=${url}&e=${firstEntity}&th=${theme}&did=${subgraphNetworkId}`}
+      />
+    );
   }
 
   const onChangeHandler = (e: any) => {

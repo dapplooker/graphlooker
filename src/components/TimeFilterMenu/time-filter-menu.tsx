@@ -17,6 +17,7 @@ const TimeFilterMenu: React.FunctionComponent<TimeFilterMenuProps & RouteCompone
 }) => {
   const parsed = queryString.parse(location.search);
   const theme = String(parsed.th);
+  const did = String(parsed.did);
 
   let selectedEntity: string;
   const endpoint = useSelector((state: EndpointState) => state.graphEndpoint.endpoint);
@@ -78,20 +79,21 @@ const TimeFilterMenu: React.FunctionComponent<TimeFilterMenuProps & RouteCompone
           endpoint,
           selectedEntity,
           theme,
-          attributeName
+          attributeName,
+          did
         );
         break;
       case timeFilterMenu.CURRENT:
-        Timestamp.currentFilter(currentMenu, endpoint, selectedEntity, theme, attributeName);
+        Timestamp.currentFilter(currentMenu, endpoint, selectedEntity, theme, attributeName, did);
         break;
       case timeFilterMenu.BEFORE:
-        Timestamp.beforeFilter(calendarDate, endpoint, selectedEntity, theme, attributeName);
+        Timestamp.beforeFilter(calendarDate, endpoint, selectedEntity, theme, attributeName, did);
         break;
       case timeFilterMenu.AFTER:
-        Timestamp.afterFilter(calendarDate, endpoint, selectedEntity, theme, attributeName);
+        Timestamp.afterFilter(calendarDate, endpoint, selectedEntity, theme, attributeName, did);
         break;
       case timeFilterMenu.ON:
-        Timestamp.onFilter(calendarDate, endpoint, selectedEntity, theme, attributeName);
+        Timestamp.onFilter(calendarDate, endpoint, selectedEntity, theme, attributeName, did);
         break;
       case timeFilterMenu.IS_EMPTY:
         Timestamp.isEmptyNotEmptyFilter(
@@ -99,20 +101,22 @@ const TimeFilterMenu: React.FunctionComponent<TimeFilterMenuProps & RouteCompone
           endpoint,
           selectedEntity,
           theme,
-          attributeName
+          attributeName,
+          did
         );
         break;
       case timeFilterMenu.NOT_EMPTY:
         Timestamp.isEmptyNotEmptyFilter(
-          label.UNDERSCORE_IS,
+          label.UNDERSCORE_NOT,
           endpoint,
           selectedEntity,
           theme,
-          attributeName
+          attributeName,
+          did
         );
         break;
       case timeFilterMenu.BETWEEN:
-        Timestamp.betweenFilter(calendarDate, endpoint, selectedEntity, theme, attributeName);
+        Timestamp.betweenFilter(calendarDate, endpoint, selectedEntity, theme, attributeName, did);
         break;
       default:
         break;

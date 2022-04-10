@@ -58,13 +58,24 @@
           background: var(--drawerToggleIconBackground);
           height: 40px;
           width: 38px;
-          border-radius: 5px;
+          border-radius: $size5;
           cursor: pointer;
-
-          cursor: pointer;
-
+          margin-left: $size10;
           &:hover {
             box-shadow: #00a1ff 0px 7px 29px 0px;
+          }
+        }
+        .social-icon {
+          display: flex;
+          align-items: center;
+          margin-top: 0.5rem;
+          margin-left: 30px;
+          .discord,
+          .twitter,
+          .medium {
+            width: 40px;
+            border-radius: $size5;
+            margin-right: $size10;
           }
         }
       }
@@ -75,7 +86,7 @@
       .theme-icon {
         // border: var(--themeIconBorder) solid 0.5px;
         padding: $size7;
-        border-radius: 5px;
+        border-radius: $size5;
         display: flex;
         align-items: center;
         margin-right: $size20;

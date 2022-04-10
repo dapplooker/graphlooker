@@ -59,6 +59,9 @@ export default class Constants {
       'updatedAt',
       '_timeStamp',
       'endTime',
+      'startTimestamp',
+      'endTimestamp',
+      'scheduledTimestamp',
     ],
   };
 
@@ -99,6 +102,7 @@ export default class Constants {
       DOWNLOADING: 'Downloading...',
       AND: 'and',
       UNDERSCORE_IS: '_is',
+      UNDERSCORE_NOT: '_not',
     },
     commonUrls: {
       BASE_URL:
@@ -107,6 +111,7 @@ export default class Constants {
           : process.env.REACT_APP_BASE_URL_PRODUCTION,
       ADDRESS_URL: process.env.REACT_APP_ADDRESS_URL,
       TNX_URL: process.env.REACT_APP_TNX_URL,
+      CHAIN_NETWORK_URL: 'https://api.thegraph.com/index-node/graphql',
     },
     exportLabels: {
       DWNLD_STARTED: 'Download Completed, you can close the tab.',
@@ -202,5 +207,20 @@ export default class Constants {
 
   public static ROUTES = {
     HOME_ROUTE: '/',
+    DISCORD: 'https://dapplooker.com/community',
+    TWITTER: 'https://twitter.com/dapplooker',
+    MEDIUM: 'https://dapplooker.medium.com/',
+  };
+
+  public static QUERY_PARAMETERS = {
+    uri: 'User Input Subgraph Endpoint URL',
+    e: 'Entity Name',
+    th: 'Theme',
+    c: 'Column Name',
+    s: 'Sort Type',
+    f: 'Filter Applied',
+    i: 'User Input Value for Filter',
+    p: 'Page Number',
+    did: 'Developement ID of Subgraph Endpoint',
   };
 }
