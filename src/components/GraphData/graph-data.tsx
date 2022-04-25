@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './graph-data.scss';
 import { useQuery } from '@apollo/client';
-import { getAllEntities } from '../../utility/graph/query';
+import { getAllEntities, getNetworkName } from '../../utility/graph/query';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Toolbar from '@mui/material/Toolbar';
 import { styled } from '@mui/material/styles';
@@ -55,6 +55,8 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
   const parsed = queryString.parse(location.search);
   let theme: any = parsed.th;
   let graphName: string | any = parsed.uri?.slice(parsed.uri?.lastIndexOf('/') + 1);
+  let did = String(parsed.did);
+  let subgraphNetworkName: string | any;
   if (parsed.uri) {
     graphName = humanizeString(graphName)?.toUpperCase();
   }
@@ -87,11 +89,19 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
       theme === label.LIGHT_THEME_LABEL ? label.DARK_THEME_LABEL : label.LIGHT_THEME_LABEL;
     dispatch(toggleTheme(newTheme));
     theme = newTheme;
-    window.location.href = `${urlLabels.BASE_URL}uri=${parsed.uri}&e=${parsed.e}&th=${theme}`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${parsed.uri}&e=${parsed.e}&th=${theme}&did=${did}`;
   };
   const handleToggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
+
+  const { data: networkName } = useQuery(getNetworkName(did), {
+    context: { clientName: 'chain-network' },
+  });
+  if (networkName) {
+    subgraphNetworkName = networkName.indexingStatuses[0].chains[0].network.toUpperCase();
+  }
+
   const { data, error, loading } = useQuery(getAllEntities);
   let allEntities: string[];
   allEntities = [];
@@ -200,7 +210,9 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
               </div>
             </div>
 
-            <h2 className="graph-heading">{graphName}</h2>
+            <h2 className="graph-heading">
+              {graphName} ({subgraphNetworkName})
+            </h2>
 
             <FilterData className="filterChart" chipData={parsed} />
 

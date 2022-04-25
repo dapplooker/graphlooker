@@ -135,7 +135,9 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
     if (!parsed.f && !parsed.i && parsed.s) {
       return (window.location.href = `${
         urlLabels.BASE_URL
-      }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&c=${parsed.c}&p=${pageNumber + 1}`);
+      }uri=${URI}&e=${selectedEntity}&th=${theme}&did=${parsed.did}&s=${parsed.s}&c=${parsed.c}&p=${
+        pageNumber + 1
+      }`);
     }
     if (parsed.c) {
       if (!parsed.s) {
@@ -143,13 +145,13 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
       }
       return (window.location.href = `${
         urlLabels.BASE_URL
-      }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&f=${parsed.f}&i=${parsed.i}&c=${
-        parsed.c
-      }&p=${pageNumber + 1}`);
+      }uri=${URI}&e=${selectedEntity}&th=${theme}&did=${parsed.did}&s=${parsed.s}&f=${parsed.f}&i=${
+        parsed.i
+      }&c=${parsed.c}&p=${pageNumber + 1}`);
     }
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&p=${
-      pageNumber + 1
-    }`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&did=${
+      parsed.did
+    }&p=${pageNumber + 1}`;
   };
   const goToPrev = () => {
     if (isPrevDisable) return;
@@ -157,7 +159,9 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
     if (!parsed.f && !parsed.i && parsed.s) {
       return (window.location.href = `${
         urlLabels.BASE_URL
-      }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&c=${parsed.c}&p=${pageNumber - 1}`);
+      }uri=${URI}&e=${selectedEntity}&th=${theme}&did=${parsed.did}&s=${parsed.s}&c=${parsed.c}&p=${
+        pageNumber - 1
+      }`);
     }
     if (parsed.c) {
       if (!parsed.s) {
@@ -165,13 +169,13 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
       }
       return (window.location.href = `${
         urlLabels.BASE_URL
-      }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&f=${parsed.f}&i=${parsed.i}&c=${
-        parsed.c
-      }&p=${pageNumber - 1}`);
+      }uri=${URI}&e=${selectedEntity}&th=${theme}&did=${parsed.did}&s=${parsed.s}&f=${parsed.f}&i=${
+        parsed.i
+      }&c=${parsed.c}&p=${pageNumber - 1}`);
     }
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&p=${
-      pageNumber - 1
-    }`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&did=${
+      parsed.did
+    }&p=${pageNumber - 1}`;
   };
 
   //Get Table Data

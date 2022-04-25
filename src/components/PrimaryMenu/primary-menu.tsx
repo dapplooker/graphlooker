@@ -33,9 +33,9 @@ const PrimaryMenu: React.FunctionComponent<PrimaryMenuProps & RouteComponentProp
     const URI = encodeURIComponent(endpoint);
     const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
     if (parsed.f && parsed.i) {
-      return (window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&s=${sortType}&f=${parsed.f}&i=${parsed.i}&c=${columnName}`);
+      return (window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&did=${parsed.did}&s=${sortType}&f=${parsed.f}&i=${parsed.i}&c=${columnName}`);
     } else {
-      return (window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&s=${sortType}&c=${columnName}`);
+      return (window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&did=${parsed.did}&s=${sortType}&c=${columnName}`);
     }
   };
 

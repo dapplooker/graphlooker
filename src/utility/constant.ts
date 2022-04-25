@@ -59,6 +59,9 @@ export default class Constants {
       'updatedAt',
       '_timeStamp',
       'endTime',
+      'startTimestamp',
+      'endTimestamp',
+      'scheduledTimestamp',
     ],
   };
 
@@ -100,6 +103,7 @@ export default class Constants {
       DOWNLOADING: 'Downloading...',
       AND: 'and',
       UNDERSCORE_IS: '_is',
+      UNDERSCORE_NOT: '_not',
       BUILT_WITH: 'Supported By',
       GRAPH_PROTOCOL: 'Graph protocol',
       COPYRIGHT: '© 2022 made with ❤️ by',
@@ -114,6 +118,7 @@ export default class Constants {
           : process.env.REACT_APP_BASE_URL_PRODUCTION,
       ADDRESS_URL: process.env.REACT_APP_ADDRESS_URL,
       TNX_URL: process.env.REACT_APP_TNX_URL,
+      CHAIN_NETWORK_URL: 'https://api.thegraph.com/index-node/graphql',
     },
     exportLabels: {
       DWNLD_STARTED: 'Download Completed, you can close the tab.',

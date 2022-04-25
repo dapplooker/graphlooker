@@ -98,7 +98,8 @@ const NumberFilterMenu: React.FunctionComponent<
               optionSelected,
               firstInputNumber,
               secondInputNumber,
-              theme
+              theme,
+              parsed.did
             )
           }
         >

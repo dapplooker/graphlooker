@@ -39,6 +39,26 @@ export const getAllAttributes = (entity: string) => {
     `;
 };
 
+export const getSubgraphNetworkId = gql`
+  query {
+    _meta {
+      deployment
+    }
+  }
+`;
+
+export const getNetworkName = (networkId: any) => {
+  return gql`
+    query {
+      indexingStatuses(subgraphs: ["${networkId}"]) {
+        chains {
+          network
+        }
+      }
+    }
+  `;
+};
+
 export const getGraphDataForID = (columnNames: ColumnProps[], entity: string, filterID: string) => {
   let queryData = ` `;
   const selectedEntity = Utility.makePluralChanges(entity);

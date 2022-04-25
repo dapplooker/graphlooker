@@ -7,9 +7,10 @@ export const filterStringIs = (
   columnName: string,
   selectedOption: string,
   stringInputValue: string,
-  theme: any
+  theme: any,
+  did: any
 ) => {
   const URI = encodeURIComponent(endpoint);
   const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
-  window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&f=${selectedOption}&i=${stringInputValue}&c=${columnName}`;
+  window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&did=${did}&f=${selectedOption}&i=${stringInputValue}&c=${columnName}`;
 };
