@@ -30,12 +30,15 @@
   border-radius: 5px;
   padding-top: $size8;
   padding-bottom: $size8;
+
   &:hover {
     background-color: #1976d2;
     color: $colorWhite;
+
     .filter-list-icon {
       color: $colorWhite;
     }
+
     .filter-by-col-label {
       color: $colorWhite;
     }
@@ -45,6 +48,7 @@
     padding-right: $size5;
     font-size: 19px;
   }
+
   .filter-by-col-label {
     color: $colorBlack;
     font-weight: bold;

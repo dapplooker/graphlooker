@@ -8,7 +8,6 @@ import { ReactComponent as GithubSVG } from '../../svg/github.svg';
 import { ReactComponent as GraphProtocolSVG } from '../../svg/graph-protocol.svg';
 import { ReactComponent as YoutubeSVG } from '../../svg/youtube.svg';
 import Constants from '../../utility/constant';
-
 const Footer: React.FunctionComponent<any> = () => {
   return (
     <>
@@ -26,31 +25,26 @@ const Footer: React.FunctionComponent<any> = () => {
               <DiscordSVG />
             </a>
           </div>
-
           <div className="icon">
             <a href="https://twitter.com/dapplooker" target="_blank" rel="noreferrer">
               <TwitterSVG />
             </a>
           </div>
-
           <div className="icon">
             <a href="https://dapplooker.medium.com/" target="_blank" rel="noreferrer">
               <MediumSVG />
             </a>
           </div>
-
           <div className="icon">
             <a href="https://t.me/dapplooker" target="_blank" rel="noreferrer">
               <TelegramSVG />
             </a>
           </div>
-
           <div className="icon">
             <a href="https://github.com/dapplooker" target="_blank" rel="noreferrer">
               <GithubSVG />
             </a>
           </div>
-
           <div className="icon">
             <a
               href="https://www.youtube.com/channel/UC1KJmtb3UhnWSN_sDv71_fg"
@@ -61,7 +55,6 @@ const Footer: React.FunctionComponent<any> = () => {
             </a>
           </div>
         </div>
-
         <div className="copyright-info">
           {Constants.LABELS.commonLables.COPYRIGHT}
           <a href="https://dapplooker.com/" target="_blank" rel="noreferrer">
@@ -73,5 +66,4 @@ const Footer: React.FunctionComponent<any> = () => {
     </>
   );
 };
-
 export default Footer;

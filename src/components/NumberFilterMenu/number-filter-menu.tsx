@@ -8,20 +8,16 @@ import Constants from '../../utility/constant';
 import './number-filter-menu.scss';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import queryString from 'query-string';
-
 const NumberFilterMenu: React.FunctionComponent<
   StringFilterMenuProps & RouteComponentProps<any>
 > = ({ attributeName, location }) => {
   const parsed = queryString.parse(location.search);
   const theme = parsed.th;
-
   const label = Constants.LABELS.commonLables;
   const filterOptionLabel = Constants.FILTERLABELS.filterOptionLabels;
-
   let selectedEntity: string;
   const endpoint = useSelector((state: EndpointState) => state.graphEndpoint.endpoint);
   selectedEntity = useSelector((state: EntityState) => state.selectedEntity.entity);
-
   const intFilter = Constants.INT_TYPE_MENU.intFilter;
   const [selectMenu, setSelectMenu] = React.useState(filterOptionLabel.EQUAL_TO); //For Number
   const [optionSelected, setOptionSelected] = useState(label.UNDERSCORE_IS);
@@ -30,7 +26,6 @@ const NumberFilterMenu: React.FunctionComponent<
   const handleChange = (event: SelectChangeEvent) => {
     setSelectMenu(event.target.value as string);
   };
-
   return (
     <>
       <MenuItem>
@@ -108,5 +103,4 @@ const NumberFilterMenu: React.FunctionComponent<
     </>
   );
 };
-
 export default withRouter(NumberFilterMenu);

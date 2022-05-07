@@ -5,11 +5,9 @@ import {
   QueryActionObjectTypes,
 } from '../../utility/redux/action-object-type';
 import { EndpointActionTypes } from '../../utility/redux/action-types';
-
 const ENDPOINT_INITIAL_STATE = {
   endpoint: '',
 };
-
 export const endpointReducer = (
   state = ENDPOINT_INITIAL_STATE,
   { type, payload }: EndpointActionObjectTypes
@@ -29,7 +27,6 @@ export const entityReducer = (state = {}, { type, payload }: EntityActionObjectT
       return state;
   }
 };
-
 export const attributesReducer = (state = {}, { type, payload }: AttributesActionObjectTypes) => {
   switch (type) {
     case EndpointActionTypes.SET_ATTRIBUTES:
@@ -38,7 +35,6 @@ export const attributesReducer = (state = {}, { type, payload }: AttributesActio
       return state;
   }
 };
-
 export const queryReducer = (state = {}, { type, payload }: QueryActionObjectTypes) => {
   switch (type) {
     case EndpointActionTypes.SET_QUERY:

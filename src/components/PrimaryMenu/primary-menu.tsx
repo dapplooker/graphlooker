@@ -11,7 +11,6 @@ import FilterMenu from '../FilterMenu/filter-menu';
 import Constants from '../../utility/constant';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import queryString from 'query-string';
-
 const PrimaryMenu: React.FunctionComponent<PrimaryMenuProps & RouteComponentProps<any>> = ({
   attributeName,
   attributeType,
@@ -23,11 +22,9 @@ const PrimaryMenu: React.FunctionComponent<PrimaryMenuProps & RouteComponentProp
   const label = Constants.LABELS.commonLables;
   const urlLabels = Constants.LABELS.commonUrls;
   const filterLabels = Constants.FILTERLABELS.dataTypeLabels;
-
   let selectedEntity: string;
   const endpoint = useSelector((state: EndpointState) => state.graphEndpoint.endpoint);
   selectedEntity = useSelector((state: EntityState) => state.selectedEntity.entity);
-
   //Sort Data (Ascending /Descending) when Attribute Clicked
   const sortDataAscDesc = (sortType: string, columnName: string) => {
     const URI = encodeURIComponent(endpoint);
@@ -38,7 +35,6 @@ const PrimaryMenu: React.FunctionComponent<PrimaryMenuProps & RouteComponentProp
       return (window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&s=${sortType}&c=${columnName}`);
     }
   };
-
   const [anchorFiterEl, setAnchorFiterEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorFiterEl);
   const handleFilterOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -47,7 +43,6 @@ const PrimaryMenu: React.FunctionComponent<PrimaryMenuProps & RouteComponentProp
   const handleCloseMenu = () => {
     setAnchorFiterEl(null);
   };
-
   const getSortingMenu = () => {
     if (
       attributeType === filterLabels.LIST ||
@@ -79,7 +74,6 @@ const PrimaryMenu: React.FunctionComponent<PrimaryMenuProps & RouteComponentProp
       );
     }
   };
-
   return (
     <>
       {getSortingMenu()}
@@ -93,7 +87,6 @@ const PrimaryMenu: React.FunctionComponent<PrimaryMenuProps & RouteComponentProp
           <span className="filter-by-col-label">{label.FILTER_BY_COL}</span>
         </button>
       </MenuItem>
-
       <Menu
         id="filter_menu"
         onClose={handleCloseMenu}
@@ -106,5 +99,4 @@ const PrimaryMenu: React.FunctionComponent<PrimaryMenuProps & RouteComponentProp
     </>
   );
 };
-
 export default withRouter(PrimaryMenu);

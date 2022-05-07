@@ -1,4 +1,5 @@
 @import '../../utility/theme/variable.scss';
+
 .modal-wrapper {
   display: flex;
   flex-direction: column;
@@ -13,22 +14,27 @@
   background: white;
   border-radius: 10px;
   z-index: 9999;
+
   .modal-container {
     width: 500px;
     margin: $size10 auto;
     font-family: $primaryFontFamily;
     text-align: center;
     font-size: $size16;
+
     .download-heading {
       font-size: 30px;
       font-weight: $fontWeight400;
     }
+
     .records-msg {
       font-weight: $fontWeight400;
+
       img {
         position: relative;
         top: 20px;
       }
+
       b {
         color: $colorCyan;
       }
@@ -38,13 +44,53 @@
       display: inline-flex;
       font-weight: $fontWeight500;
       margin-left: 0;
+
       img {
         position: relative;
         bottom: 20px;
       }
+
       .msg {
         color: red;
       }
     }
+  }
+}
+
+.success {
+  font-size: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot {
+  height: 7px;
+  width: 7px;
+  border: 1px solid black;
+  display: inline-block;
+  padding: 4px;
+  margin-left: 20px;
+  border-radius: 50%;
+  opacity: .7;
+}
+
+.dot1 {
+  background-color: rgb(0, 0, 0);
+  animation: jump-up 0.8s 0.1s linear infinite;
+}
+
+.dot2 {
+  background-color: rgb(0, 0, 0);
+  animation: jump-up 0.8s 0.2s linear infinite;
+}
+
+.dot3 {
+  background-color: rgb(0, 0, 0);
+  animation: jump-up 0.8s 0.3s linear infinite;
+}
+
+@keyframes jump-up {
+  50% {
+    transform: translate(0, -10px);
   }
 }

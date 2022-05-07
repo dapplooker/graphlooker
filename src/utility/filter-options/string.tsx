@@ -1,5 +1,4 @@
 import Constants from '../constant';
-
 const urlLabels = Constants.LABELS.commonUrls;
 export const filterStringIs = (
   endpoint: string,

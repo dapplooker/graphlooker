@@ -9,7 +9,6 @@ import './home.scss';
 import Navbar from '../Navbar/navbar';
 import Constants from '../../utility/constant';
 import { ThemeState } from '../../utility/redux/state';
-
 const Home: React.FunctionComponent<RouteComponentProps<any>> = ({ history }) => {
   const commonLables = Constants.LABELS.commonLables;
   const [endpoint, setEndpoint] = React.useState(commonLables.EMPTY);
@@ -20,18 +19,15 @@ const Home: React.FunctionComponent<RouteComponentProps<any>> = ({ history }) =>
   const dispatch = useDispatch();
   const urlRegex = /^(https:\/\/api\.|http:\/\/api\.)[a-zA-Z0-9\-_$]+\.[a-zA-Z]{2,5}/g;
   let isendpointCorrect = urlRegex.test(endpoint);
-
   const searchEndpoint = (e: any) => {
     e.preventDefault();
     dispatch(setGraphEndpoint(endpoint));
   };
-
   useEffect(() => {
     if (error) {
       setErrorMsg(error?.message);
     }
   }, [error]);
-
   useEffect(() => {
     if (isendpointCorrect) {
       setIsError(false);
@@ -39,7 +35,6 @@ const Home: React.FunctionComponent<RouteComponentProps<any>> = ({ history }) =>
       setIsError(true);
     }
   }, [endpoint, isendpointCorrect]);
-
   if (loading) {
   } else {
     if (error) {
@@ -51,12 +46,10 @@ const Home: React.FunctionComponent<RouteComponentProps<any>> = ({ history }) =>
       return <Redirect push to={`explore?uri=${url}&e=${firstEntity}&th=${theme}`} />;
     }
   }
-
   const onChangeHandler = (e: any) => {
     setEndpoint(e);
     setErrorMsg('');
   };
-
   return (
     <>
       <div theme-selector={theme}>
@@ -76,9 +69,7 @@ const Home: React.FunctionComponent<RouteComponentProps<any>> = ({ history }) =>
               <button className="search-button" type="submit" disabled={isError}>
                 {commonLables.EXPLORE}
               </button>
-
               <p className="explore-msg">{Constants.LABELS.commonLables.DESC_TITLE}</p>
-
               {isError && endpoint.length > 0 ? (
                 <ErrorMessage
                   type="message"
@@ -101,5 +92,4 @@ const Home: React.FunctionComponent<RouteComponentProps<any>> = ({ history }) =>
     </>
   );
 };
-
 export default withRouter(Home);

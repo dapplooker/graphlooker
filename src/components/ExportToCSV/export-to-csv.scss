@@ -11,15 +11,18 @@
   position: absolute;
   right: 80px;
   top: 13px;
+
   svg {
     color: var(--iconColour);
     height: 22px;
   }
+
   .csvlink {
     text-decoration: none;
     color: inherit;
   }
 }
+
 .btn-exportcsv:disabled {
   background: #cccccc;
   cursor: not-allowed;

@@ -3,14 +3,12 @@ import Constants from './constant';
 import pluralizer from 'pluralize';
 import humanizeString from 'humanize-string';
 import moment from 'moment';
-
 const urlLabels = Constants.LABELS.commonUrls;
 const dataTypeLabel = Constants.FILTERLABELS.dataTypeLabels;
 const entityArray = Constants.FILTERLABELS.checkProperEntityName;
 const regex = Constants.REGEX;
 const columnLabels = Constants.FILTERLABELS.columnNameLabels;
 const timestampColumnNames = Constants.FILTERLABELS.timestampColumnNames;
-
 export default class Utility {
   public static getColumnNameForOptimizeQuery = (columnNames: any) => {
     let columnName = columnLabels.ID;
@@ -65,7 +63,6 @@ export default class Utility {
     }
     return columnName;
   };
-
   public static verifyAddress = (
     row: any,
     columnName: string,
@@ -76,7 +73,6 @@ export default class Utility {
     let inputValue = row[`${columnName}`];
     let address = ethers.utils.isAddress(inputValue);
     let verifyTxHash = Boolean(regex.TXHASH_REGEX.test(inputValue));
-
     if (columnType === dataTypeLabel.OBJECT) {
       Utility.checkAttributeIsEntity(inputValue.__typename, inputValue.id, endpoint, theme);
     } else if (columnName === columnLabels.ID) {
@@ -146,7 +142,6 @@ export default class Utility {
     ]);
     return mapForString;
   }
-
   public static checkAttributeIsEntity = (
     entity: string,
     id: string,
@@ -157,10 +152,8 @@ export default class Utility {
     const selectedEntity = entity.charAt(0).toLowerCase() + entity.slice(1);
     window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&id=${id}`;
   };
-
   public static checkAddressValidity = (entity: string, id: string, type: string) => {
     let verifyAddress = ethers.utils.isAddress(id);
-
     if (verifyAddress) {
       window.open(
         `${urlLabels.ADDRESS_URL}${id}`,
@@ -175,7 +168,6 @@ export default class Utility {
       return true;
     }
   };
-
   public static getTimestampColumns = (columnName: string) => {
     let isColumnExist = false;
     // eslint-disable-next-line array-callback-return
@@ -186,7 +178,6 @@ export default class Utility {
     });
     return isColumnExist;
   };
-
   public static getProperEntity = (entity: string) => {
     let newEntity = entity;
     // eslint-disable-next-line array-callback-return
@@ -197,14 +188,12 @@ export default class Utility {
     });
     return newEntity;
   };
-
   public static getIntUptoTwoDecimal = (row: any, inputValue: string) => {
     let convertedInt = parseFloat(row[`${inputValue}`]);
     if (convertedInt % 1 !== 0) {
       return true;
     }
   };
-
   //Function to make of entities plural
   public static makePluralChanges = (normalStr: string) => {
     let pluralStr = pluralizer(normalStr);
@@ -217,13 +206,11 @@ export default class Utility {
       return pluralStr;
     }
   };
-
   public static linkToAddressAndTxHash = (row: any, columnName: string, columnType: string) => {
     if (columnType === dataTypeLabel.OBJECT) {
       return true;
     } else if (columnName === columnLabels.ID) {
       let splitNumber = row[`${columnName}`].split('-');
-
       for (let i = 0; i < splitNumber.length; i++) {
         if (!regex.CHECK_NUMBER_REGEX.test(splitNumber[i])) {
           return true;
@@ -238,11 +225,9 @@ export default class Utility {
       return true;
     }
   };
-
   public static sortedTimeData = (data: object[]) => {
     let sortedByTime: any = data.map((item) => {
       let array = Object.entries(item);
-
       array.forEach((itm) => {
         if (Utility.getTimestampColumns(itm[0])) {
           itm[1] = moment(new Date(itm[1] * 1000)).format(
@@ -256,11 +241,9 @@ export default class Utility {
     return sortedByTime;
   };
 }
-
 export const sortData = (sortedData: object[]) => {
   sortedData = sortedData.map((item: object) => {
     let array = Object.entries(item);
-
     array.forEach((itm: any) => {
       if (typeof itm[1] === 'object') {
         itm[0] = `${itm[0]}_id`;
@@ -268,17 +251,13 @@ export const sortData = (sortedData: object[]) => {
       }
       itm[0] = humanizeString(itm[0]);
     });
-
     let sortedObj = Object.fromEntries(array);
     return sortedObj;
   });
-
   return sortedData;
 };
-
 export const customMessages = (message: string | any, endpoint: string) => {
   let customMessage: string = message;
-
   try {
     if (endpoint.includes(Constants.VALID_ENDPOINT.SUBGRAPH)) {
       if (message.includes('Subgraph' && 'not found')) {
@@ -296,6 +275,6 @@ export const customMessages = (message: string | any, endpoint: string) => {
     } else {
       return (customMessage = Constants.ERROR_MESSAGES.INVALID);
     }
-  } catch (err) {}
+  } catch (err) { }
   return customMessage;
 };

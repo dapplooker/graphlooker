@@ -10,31 +10,25 @@ import { useSelector } from 'react-redux';
 import { EndpointState, EntityState } from '../../utility/redux/state';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-
 const TimeFilterMenu: React.FunctionComponent<TimeFilterMenuProps & RouteComponentProps<any>> = ({
   attributeName,
   location,
 }) => {
   const parsed = queryString.parse(location.search);
   const theme = String(parsed.th);
-
   let selectedEntity: string;
   const endpoint = useSelector((state: EndpointState) => state.graphEndpoint.endpoint);
   selectedEntity = useSelector((state: EntityState) => state.selectedEntity.entity);
-
   const label = Constants.LABELS.commonLables;
-
   const timestampFilter = Constants.TIMESTAMP_MENU.timestampFilter;
   const timeFilter = Constants.TIMESTAMP_MENU.timeFilter;
   const currentFilter = Constants.TIMESTAMP_MENU.currentFilter;
   const timeFilterMenu = Constants.FILTERLABELS.timestampFilters;
-
   const [selectMenu, setSelectMenu] = React.useState(timeFilterMenu.PREVIOUS);
   const [timeMenu, setTimeMenu] = React.useState(timeFilterMenu.DAYS);
   const [currentMenu, setCurrentMenu] = React.useState(timeFilterMenu.DAY);
   const [inputValues, setInputValues] = React.useState(30);
   const [calendarDate, setCalendarDate] = React.useState(new Date());
-
   const handleChange = (event: SelectChangeEvent) => {
     setSelectMenu(event.target.value as string);
   };
@@ -44,7 +38,6 @@ const TimeFilterMenu: React.FunctionComponent<TimeFilterMenuProps & RouteCompone
   const handleChangeCurrent = (event: SelectChangeEvent) => {
     setCurrentMenu(event.target.value as string);
   };
-
   const renderSelectMenu = (
     filteringArray: any[],
     menu: any,
@@ -68,7 +61,6 @@ const TimeFilterMenu: React.FunctionComponent<TimeFilterMenuProps & RouteCompone
       </>
     );
   };
-
   const renderUpdateButtonFunctions = () => {
     switch (selectMenu) {
       case timeFilterMenu.PREVIOUS:
@@ -118,7 +110,6 @@ const TimeFilterMenu: React.FunctionComponent<TimeFilterMenuProps & RouteCompone
         break;
     }
   };
-
   return (
     <>
       <MenuItem
@@ -141,7 +132,6 @@ const TimeFilterMenu: React.FunctionComponent<TimeFilterMenuProps & RouteCompone
             </MenuItem>
           ))}
         </Select>
-
         {selectMenu === timeFilterMenu.PREVIOUS ? (
           <>
             <input
@@ -153,20 +143,18 @@ const TimeFilterMenu: React.FunctionComponent<TimeFilterMenuProps & RouteCompone
             {renderSelectMenu(timeFilter, timeMenu, handleChangeTime)}
           </>
         ) : null}
-
         {selectMenu === timeFilterMenu.CURRENT
           ? renderSelectMenu(currentFilter, currentMenu, handleChangeCurrent)
           : null}
         {selectMenu === timeFilterMenu.BEFORE ||
-        selectMenu === timeFilterMenu.AFTER ||
-        selectMenu === timeFilterMenu.ON ? (
+          selectMenu === timeFilterMenu.AFTER ||
+          selectMenu === timeFilterMenu.ON ? (
           <>
             <div className="calendar">
               <Calendar onChange={setCalendarDate} value={calendarDate} />
             </div>
           </>
         ) : null}
-
         {selectMenu === timeFilterMenu.BETWEEN ? (
           <>
             <div className="calendar">
@@ -175,9 +163,7 @@ const TimeFilterMenu: React.FunctionComponent<TimeFilterMenuProps & RouteCompone
           </>
         ) : null}
       </MenuItem>
-
       <Divider sx={{ my: 0.5 }} />
-
       <MenuItem className="end-menu-item">
         <Button variant="contained" onClick={() => renderUpdateButtonFunctions()}>
           {label.UPDATE_FILTER}
@@ -186,5 +172,4 @@ const TimeFilterMenu: React.FunctionComponent<TimeFilterMenuProps & RouteCompone
     </>
   );
 };
-
 export default withRouter(TimeFilterMenu);

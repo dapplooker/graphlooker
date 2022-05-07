@@ -37,7 +37,6 @@ import ExportButton from '../ExportToCSV/ExportButton';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import NoRecords from '../NoRecords/NoRecords';
 import FilterData from '../FilterData/FilterData';
-
 const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteComponentProps<any>> = ({
   drawerOpen,
   location,
@@ -54,15 +53,11 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
   const theme = parsed.th;
   const dispatch = useDispatch();
 
-  
-
   const label = Constants.LABELS.commonLables;
   const urlLabels = Constants.LABELS.commonUrls;
   const dataTypeLabel = Constants.FILTERLABELS.dataTypeLabels;
-
   const queryDataGlobalState = useSelector((state: QueryDataState) => state.queryState.query);
   const [errorMsg, setErrorMsg] = useState('');
-
   const getBoardDataAsQuery = (error: string) => {
     if (parsed.id) {
       return getGraphDataForID(listOfattributes, selectedEntity, `${parsed.id}`);
@@ -118,7 +113,6 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
     getBoardData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const checkForPagination = () => {
     if (parsed.p) {
       const paginateNumber: string = `${parsed.p}`;
@@ -131,59 +125,47 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
     }
     return 100 * (pageNumber - 1);
   };
-
   const goToNext = () => {
     if (isNextDisable) return;
     const URI = encodeURIComponent(endpoint);
     if (!parsed.f && !parsed.i && parsed.s) {
-      return (window.location.href = `${
-        urlLabels.BASE_URL
-      }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&c=${parsed.c}&p=${pageNumber + 1}`);
+      return (window.location.href = `${urlLabels.BASE_URL
+        }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&c=${parsed.c}&p=${pageNumber + 1}`);
     }
     if (parsed.c) {
       if (!parsed.s) {
         parsed.s = label.DESC;
       }
-      return (window.location.href = `${
-        urlLabels.BASE_URL
-      }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&f=${parsed.f}&i=${parsed.i}&c=${
-        parsed.c
-      }&p=${pageNumber + 1}`);
+      return (window.location.href = `${urlLabels.BASE_URL
+        }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&f=${parsed.f}&i=${parsed.i}&c=${parsed.c
+        }&p=${pageNumber + 1}`);
     }
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&p=${
-      pageNumber + 1
-    }`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&p=${pageNumber + 1
+      }`;
   };
   const goToPrev = () => {
     if (isPrevDisable) return;
     const URI = encodeURIComponent(endpoint);
     if (!parsed.f && !parsed.i && parsed.s) {
-      return (window.location.href = `${
-        urlLabels.BASE_URL
-      }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&c=${parsed.c}&p=${pageNumber - 1}`);
+      return (window.location.href = `${urlLabels.BASE_URL
+        }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&c=${parsed.c}&p=${pageNumber - 1}`);
     }
     if (parsed.c) {
       if (!parsed.s) {
         parsed.s = label.DESC;
       }
-      return (window.location.href = `${
-        urlLabels.BASE_URL
-      }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&f=${parsed.f}&i=${parsed.i}&c=${
-        parsed.c
-      }&p=${pageNumber - 1}`);
+      return (window.location.href = `${urlLabels.BASE_URL
+        }uri=${URI}&e=${selectedEntity}&th=${theme}&s=${parsed.s}&f=${parsed.f}&i=${parsed.i}&c=${parsed.c
+        }&p=${pageNumber - 1}`);
     }
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&p=${
-      pageNumber - 1
-    }`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&p=${pageNumber - 1
+      }`;
   };
-
   //Get Table Data
   const [getBoardData, { error, loading, data }] = useLazyQuery(getBoardDataAsQuery(errorMsg));
-
   useEffect(() => {
     error && setErrorMsg(error?.message);
   }, [error, data]);
-
   if (loading) {
   }
   if (error) {
@@ -202,7 +184,6 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
     }
     dispatch(setDataLoading(false));
   }
-
   //Open/Close Filter DropDown Menu Functions
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [attribute, setAttribute] = useState(label.EMPTY);
@@ -223,26 +204,23 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
   const handleCloseMenu = () => {
     setAnchorEl(null);
   };
-
   //Snackbar(Toast) Open/Close handle
   const [open, setOpen] = useState(false);
   const handleCloseToast = () => {
     setOpen(false);
   };
-
   if (errorMsg) {
     listOfattributes = listOfattributes.filter((item) => item.type !== dataTypeLabel.OBJECT);
   }
   if (listOfattributes.length === 0) {
     dispatch(setDataLoading(false));
   }
-
   return (
     <>
-     <div className='FilterData'>
-     <FilterData  props={parsed} />
-     </div>
-     {/* Chip  */}
+      <div className='FilterData'>
+        <FilterData props={parsed} />
+      </div>
+      {/* Chip  */}
       <ExportButton rows={rows} />
       <div className="all-graph-data">
         <div className={`table-conatiner ${drawerOpen ? 'drawer-open-table-length' : label.EMPTY}`}>
@@ -253,11 +231,10 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
                   listOfattributes.map((item, i) => (
                     <TableCell
                       key={i}
-                      className={`${
-                        theme === label.LIGHT_THEME_LABEL
+                      className={`${theme === label.LIGHT_THEME_LABEL
                           ? 'table-head-cell-light'
                           : 'table-head-cell'
-                      }`}
+                        }`}
                     >
                       <div className="attribute-columns-cell">
                         <Button
@@ -293,69 +270,64 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
             <TableBody>
               {rows.length !== 0
                 ? rows.map((row, i) => (
-                    <TableRow className="tabledata-row" key={i}>
-                      {listOfattributes.map((item, key) => (
-                        <TableCell
-                          key={key}
-                          className={`${
-                            Utility.linkToAddressAndTxHash(row, item.name, item.type)
-                              ? 'tablerow-data-css address-data-css'
-                              : 'tablerow-data-css'
+                  <TableRow className="tabledata-row" key={i}>
+                    {listOfattributes.map((item, key) => (
+                      <TableCell
+                        key={key}
+                        className={`${Utility.linkToAddressAndTxHash(row, item.name, item.type)
+                            ? 'tablerow-data-css address-data-css'
+                            : 'tablerow-data-css'
                           }`}
-                          onClick={() => {
-                            let openCloseSnackbar = Utility.verifyAddress(
-                              row,
-                              item.name,
-                              item.type,
-                              endpoint,
-                              String(theme)
-                            );
-                            setOpen(Boolean(openCloseSnackbar));
-                          }}
-                        >{`${
-                          item.type === dataTypeLabel.LIST ||
+                        onClick={() => {
+                          let openCloseSnackbar = Utility.verifyAddress(
+                            row,
+                            item.name,
+                            item.type,
+                            endpoint,
+                            String(theme)
+                          );
+                          setOpen(Boolean(openCloseSnackbar));
+                        }}
+                      >{`${item.type === dataTypeLabel.LIST ||
                           item.type === dataTypeLabel.OBJECT ||
                           item.type === dataTypeLabel.NON_NULL
-                            ? row[`${item.name}`] !== undefined
-                              ? row[`${item.name}`].id
-                              : label.EMPTY
-                            : Utility.getTimestampColumns(item.name)
+                          ? row[`${item.name}`] !== undefined
+                            ? row[`${item.name}`].id
+                            : label.EMPTY
+                          : Utility.getTimestampColumns(item.name)
                             ? row[`${item.name}`] !== undefined
                               ? moment(new Date(row[`${item.name}`] * 1000)).format(
-                                  label.TIME_FORMAT
-                                )
+                                label.TIME_FORMAT
+                              )
                               : label.EMPTY
                             : item.typeName === dataTypeLabel.BIGINT ||
                               item.typeName === dataTypeLabel.BIGDECIMAL ||
                               item.typeName === dataTypeLabel.INT
-                            ? Utility.getIntUptoTwoDecimal(row, item.name)
-                              ? parseInt(row[`${item.name}`]).toFixed(2)
+                              ? Utility.getIntUptoTwoDecimal(row, item.name)
+                                ? parseInt(row[`${item.name}`]).toFixed(2)
+                                : row[`${item.name}`] !== undefined
+                                  ? row[`${item.name}`]
+                                  : label.EMPTY
                               : row[`${item.name}`] !== undefined
-                              ? row[`${item.name}`]
-                              : label.EMPTY
-                            : row[`${item.name}`] !== undefined
-                            ? row[`${item.name}`]
-                            : label.EMPTY
+                                ? row[`${item.name}`]
+                                : label.EMPTY
                         }`}</TableCell>
-                      ))}
-                    </TableRow>
-                  ))
+                    ))}
+                  </TableRow>
+                ))
                 : label.EMPTY}
             </TableBody>
           </Table>
-
           {errorMsg && !data ? (
             <ErrorMessage type="icon" errorMessage={errorMsg} endpoint={endpoint}></ErrorMessage>
           ) : (
             label.EMPTY
           )}
-
           {rows.length > 0 || errorMsg || parsed.v ? (
             label.EMPTY
           ) : (
             <NoRecords listOfattributes={listOfattributes} />
           )}
-
           <Menu id="menu" onClose={handleCloseMenu} anchorEl={anchorEl} open={Boolean(anchorEl)}>
             <PrimaryMenu
               attributeName={attribute}
@@ -376,9 +348,8 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
         </div>
         {parsed.id === undefined && rows.length > 0 ? (
           <div
-            className={`next-previous-option ${
-              drawerOpen ? 'drawer-open-next-previous-option' : label.EMPTY
-            }`}
+            className={`next-previous-option ${drawerOpen ? 'drawer-open-next-previous-option' : label.EMPTY
+              }`}
           >
             <Tooltip title="Previous">
               <NavigateBeforeIcon
@@ -399,5 +370,4 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
     </>
   );
 };
-
 export default withRouter(GraphDataTable);

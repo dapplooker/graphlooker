@@ -1,36 +1,44 @@
 @import '../../utility/theme/variable.scss';
+
 .calendar-menu {
   display: flex;
   flex-direction: column;
+
   .first-select-menu {
     width: 100%;
   }
 }
+
 .first-select-menu {
   width: 120px;
   height: 40px;
+
   &:focus {
     border-radius: $size4;
     border-color: #80bdff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
 }
+
 .time-inputfield {
   width: 40px;
   padding: $size10;
   margin-left: $size10;
   border: 1px solid black;
 }
+
 .second-select-menu {
   width: 120px;
   height: 40px;
   margin-left: $size10;
+
   &:focus {
     border-radius: $size4;
     border-color: #80bdff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
 }
+
 .calendar {
   padding-top: $size20;
 }

@@ -14,8 +14,6 @@
   }
 }
 
-
-
 .error-screen {
   width: 100%;
   height: 100vh;
@@ -33,12 +31,6 @@
   }
 }
 
-.beta-item {
-
-  padding-bottom: 20px;
-
-}
-
 .card-container {
   display: flex;
 
@@ -47,7 +39,6 @@
 
     .toolbar {
       display: flex;
-
       justify-content: space-between;
       align-items: center;
       height: 100%;
@@ -57,8 +48,6 @@
         padding: 0;
       }
 
-
-
       .menu-container {
         width: 280px;
         box-sizing: border-box;
@@ -66,11 +55,10 @@
         justify-content: space-between;
         align-items: center;
         padding: 0;
-        //border: red solid 2px;
         margin-left: $size20;
         height: 100%;
 
-        .beta-1 img {
+        .beta-icon img {
           height: 20px;
           width: 22px;
           margin-left: -5px;
@@ -86,8 +74,6 @@
           width: 24px;
           margin-left: 65px;
           margin-bottom: 14px;
-
-
           border-radius: $size5;
           cursor: pointer;
 
@@ -97,10 +83,7 @@
         }
       }
 
-
-
       .social-icons {
-
         position: absolute;
         left: 350px;
         display: flex;
@@ -108,7 +91,6 @@
         justify-content: space-around;
         box-sizing: border-box;
         padding: $size7;
-
 
         .icon {
           width: 33px;

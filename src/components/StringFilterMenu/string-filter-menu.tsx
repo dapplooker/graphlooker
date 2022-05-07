@@ -8,20 +8,16 @@ import { StringFilterMenuProps } from '../../utility/interface/props';
 import './string-filter-menu.scss';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import queryString from 'query-string';
-
 const StringFilterMenu: React.FunctionComponent<
   StringFilterMenuProps & RouteComponentProps<any>
 > = ({ attributeName, location }) => {
   const parsed = queryString.parse(location.search);
   const theme = parsed.th;
-
   const label = Constants.LABELS.commonLables;
   const filterOptionLabel = Constants.FILTERLABELS.filterOptionLabels;
-
   let selectedEntity: string;
   const endpoint = useSelector((state: EndpointState) => state.graphEndpoint.endpoint);
   selectedEntity = useSelector((state: EntityState) => state.selectedEntity.entity);
-
   const stringFilter = Constants.STRING_TYPE_MENU.stringFilter;
   const [selectStringMenu, setSelectStringMenu] = React.useState(label.IS); //For String
   const [stringValue, setStringValue] = useState(label.EMPTY);
@@ -52,7 +48,7 @@ const StringFilterMenu: React.FunctionComponent<
       </MenuItem>
       <MenuItem>
         {selectStringMenu === filterOptionLabel.IS_EMPTY ||
-        selectStringMenu === filterOptionLabel.NOT_EMPTY ? (
+          selectStringMenu === filterOptionLabel.NOT_EMPTY ? (
           label.EMPTY
         ) : (
           <>
@@ -89,5 +85,4 @@ const StringFilterMenu: React.FunctionComponent<
     </>
   );
 };
-
 export default withRouter(StringFilterMenu);

@@ -5,13 +5,11 @@ import NumberFilterMenu from '../NumberFilterMenu/number-filter-menu';
 import TimeFilterMenu from '../TimeFilterMenu/time-filter-menu';
 import Constants from '../../utility/constant';
 import Utility from '../../utility/utility';
-
 const FilterMenu: React.FunctionComponent<FilterMenuProps> = ({
   attributeName,
   attributeDataType,
 }) => {
   const dataTypeLabel = Constants.FILTERLABELS.dataTypeLabels;
-
   const getTimestampMenuItem = () => {
     return (
       <>
@@ -19,7 +17,6 @@ const FilterMenu: React.FunctionComponent<FilterMenuProps> = ({
       </>
     );
   };
-
   const getNumberOrStringMenu = () => {
     if (
       attributeDataType === dataTypeLabel.BIGINT ||
@@ -39,7 +36,6 @@ const FilterMenu: React.FunctionComponent<FilterMenuProps> = ({
       );
     }
   };
-
   return (
     <>
       {Utility.getTimestampColumns(attributeName)
@@ -48,5 +44,4 @@ const FilterMenu: React.FunctionComponent<FilterMenuProps> = ({
     </>
   );
 };
-
 export default FilterMenu;

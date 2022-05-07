@@ -10,21 +10,25 @@
   min-height: 100vh;
   text-align: center;
   padding-top: 3rem;
+
   h1 {
     font-size: 5rem;
     margin: 9rem 0 3rem 0;
     font-weight: $fontWeight400;
   }
+
   .search-box {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 500px;
+
     .search-box-form {
       // display: flex;
       // justify-content: flex-start;
       width: 850px;
       margin: 2.5rem auto 0;
+
       // flex-wrap: wrap;
       .search-input {
         border: var(--searchBoxBorder);
@@ -38,6 +42,7 @@
         margin-bottom: 8px;
         font-size: $size20;
       }
+
       .search-button {
         font-weight: $fontWeight700;
         font-size: 23px;
@@ -54,12 +59,14 @@
         position: relative;
         top: 1px;
       }
+
       .explore-msg {
         font-size: $size18;
         font-family: $primaryFontFamily;
         margin: 0;
         text-align: left;
       }
+
       .search-button:disabled {
         // background: #fd2121;
         cursor: not-allowed;

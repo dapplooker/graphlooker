@@ -1,4 +1,5 @@
 @import '../../utility/theme/variable.scss';
+
 footer {
   width: 100%;
   height: 50px;
@@ -17,6 +18,7 @@ footer {
     margin-left: 20px;
     display: flex;
     align-items: center;
+
     a.icon {
       margin: auto 5px;
 
@@ -32,6 +34,7 @@ footer {
     justify-content: center;
     align-items: center;
     margin: auto;
+
     .icon {
       width: 24px;
       height: 24px;

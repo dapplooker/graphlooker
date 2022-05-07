@@ -10,7 +10,6 @@ import { EndpointState, EntityState } from '../../utility/redux/state';
 import Constants from '../../utility/constant';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import queryString from 'query-string';
-
 const ListItem: React.FunctionComponent<ListItemProps & RouteComponentProps<any>> = ({
   entity,
   location,
@@ -46,5 +45,4 @@ const ListItem: React.FunctionComponent<ListItemProps & RouteComponentProps<any>
     </React.Fragment>
   );
 };
-
 export default withRouter(ListItem);
