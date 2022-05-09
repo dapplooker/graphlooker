@@ -1,4 +1,6 @@
 @import '../../utility/theme/variable.scss';
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@1,700&family=Bebas+Neue&display=swap');
+
 .modal-wrapper {
   display: flex;
   flex-direction: column;
@@ -8,27 +10,52 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
-  height: 500px;
+  width: 505px;
+  height: 400px;
   background: white;
-  border-radius: 10px;
+  border-radius: $size10;
   z-index: 9999;
+
   .modal-container {
-    width: 500px;
+    width: 505px;
     margin: $size10 auto;
     font-family: $primaryFontFamily;
     text-align: center;
     font-size: $size16;
+
+    .download-complete {
+      align-items: center;
+      font-family: 'Bebas Neue';
+      justify-content: center;
+      font-size: 50px;
+      text-align: center;
+      transform: translate(0%, 0%);
+      padding: 150px 50px;
+    }
+
+    .download-soon {
+      p {
+        font-size: $size36;
+        font-family: 'Bebas Neue';
+        color: $colorCyan;
+        text-shadow: 0.7px 0.7px black;
+        animation: animate-text 1.5s infinite alternate;
+      }
+    }
+
     .download-heading {
-      font-size: 30px;
+      font-size: $size30;
       font-weight: $fontWeight400;
     }
+
     .records-msg {
       font-weight: $fontWeight400;
+
       img {
         position: relative;
-        top: 20px;
+        top: $size10;
       }
+
       b {
         color: $colorCyan;
       }
@@ -37,14 +64,29 @@
     .warning-container {
       display: inline-flex;
       font-weight: $fontWeight500;
-      margin-left: 0;
+      margin-left: 5%;
+
+
+
       img {
         position: relative;
-        bottom: 20px;
+        bottom: $size20;
       }
+
       .msg {
+
         color: red;
       }
     }
+  }
+}
+
+@keyframes animate-text {
+  from {
+    opacity: 0.2;
+  }
+
+  to {
+    opacity: 1;
   }
 }

@@ -105,7 +105,7 @@ export default class Constants {
       DAPPLOOKER: 'DappLooker',
       TEAM: 'team.',
       NULL_VALUE: 'Null value resolved',
-      
+
     },
     commonUrls: {
       BASE_URL:
@@ -117,10 +117,14 @@ export default class Constants {
     },
     exportLabels: {
       DWNLD_STARTED: 'Download Completed, you can close the tab.',
-      DWNLD_SOON: 'Download is in Progress...',
+      DWNLD_SOON: 'Your download is in progress...',
       HOLD_MSG: 'The bits are breeding...',
       RECORDS_MSG: 'RECORDS DOWNLOADED.',
       CLOSE_TAB_MSG: 'IF YOU WISH TO STOP DOWNLOAD, CLOSE THE TAB.',
+      SUCCESSFUL_DOWNLOAD: 'Your csv file has downloaded successfully',
+      NO_DOWNLOAD: "Don't want to download?",
+      STOP_DOWNLOAD: 'close the tab to stop the downloading procedure',
+      PROGRESS_MSSG: 'Your download is in progress...',
     },
     errorComponenet: {
       queryFailedMsg: 'Unexpected error encountered. Please try again after sometime.',
@@ -192,9 +196,9 @@ export default class Constants {
       { menuItem: 'Not Empty', menuValue: '_not' },
     ],
   };
- 
 
-  
+
+
   public static NUMBERS = {
     CSV_Data: 100000,
   };
@@ -214,12 +218,11 @@ export default class Constants {
     HOME_ROUTE: '/',
   };
 
-  public static LENGTH_OF_STRING={
-    VALUE:21,
+  public static LENGTH_OF_STRING = {
+    VALUE: 21,
   }
-  
-  
+
+
 
 
 }
-  
