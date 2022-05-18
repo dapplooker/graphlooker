@@ -115,11 +115,12 @@ const DataBoard: React.FunctionComponent<DataBoardProps & RouteComponentProps> =
     <>
 
       <div>{parsed.v !== undefined ? <ExportToCsv /> : null}</div>
-     
-           <Main open={drawerOpen}>
+
+      <Main open={drawerOpen}>
         <div className="tab-pane" id="tab0" role="tabpanel" aria-labelledby="tab_0">
           {listOfattributes.length !== 0 ? (
             <GraphDataTable drawerOpen={drawerOpen}></GraphDataTable>
+
           ) : (
             <NoRecords listOfattributes={listOfattributes} />
           )}

@@ -3,14 +3,15 @@ import Constants from './constant';
 import pluralizer from 'pluralize';
 import humanizeString from 'humanize-string';
 import moment from 'moment';
-
+import { Allfilters } from '../utility/interface/props'
 const urlLabels = Constants.LABELS.commonUrls;
 const dataTypeLabel = Constants.FILTERLABELS.dataTypeLabels;
 const entityArray = Constants.FILTERLABELS.checkProperEntityName;
 const regex = Constants.REGEX;
 const columnLabels = Constants.FILTERLABELS.columnNameLabels;
 const timestampColumnNames = Constants.FILTERLABELS.timestampColumnNames;
-
+let values: Allfilters[] = [];
+//let listOfFilters: { filterName: string | (string | null)[] | null, columnName: string | (string | null)[] | null, inputName: string | (string | null)[] | null | number }[] = [];
 export default class Utility {
   public static getColumnNameForOptimizeQuery = (columnNames: any) => {
     let columnName = columnLabels.ID;
@@ -146,7 +147,6 @@ export default class Utility {
     ]);
     return mapForString;
   }
-
   public static checkAttributeIsEntity = (
     entity: string,
     id: string,
@@ -158,6 +158,13 @@ export default class Utility {
     window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&id=${id}`;
   };
 
+  public static getAllFilters = (filterName: string | (string | null)[] | null, columnName: string | (string | null)[] | null, inputName: string | (string | null)[] | null | number) => {
+    let checkobj = { filterName: filterName, columnName: columnName, inputName: inputName };
+    if (values.indexOf(checkobj) == -1)
+      values.push({ filterName: filterName, columnName: columnName, inputName: inputName });
+    console.log(JSON.stringify(values));
+    return values;
+  }
   public static checkAddressValidity = (entity: string, id: string, type: string) => {
     let verifyAddress = ethers.utils.isAddress(id);
 
@@ -175,6 +182,13 @@ export default class Utility {
       return true;
     }
   };
+
+  public static getColumnandFilter = (entity: string, columnName: string, filter: string) => {
+    let v: string = ""
+    v = v + entity + "&" + columnName + "&" + filter;
+    return v;
+  }
+
 
   public static getTimestampColumns = (columnName: string) => {
     let isColumnExist = false;
@@ -296,6 +310,6 @@ export const customMessages = (message: string | any, endpoint: string) => {
     } else {
       return (customMessage = Constants.ERROR_MESSAGES.INVALID);
     }
-  } catch (err) {}
+  } catch (err) { }
   return customMessage;
 };

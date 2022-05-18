@@ -3,6 +3,7 @@ import { ErrorMassageProps } from '../../utility/interface/props';
 import './error-message.scss';
 import { customMessages } from '../../utility/utility';
 import Constants from '../../utility/constant';
+import GraphdataTable from '../GraphDataTable/graph-data-table'
 const errorLabels = Constants.LABELS.errorComponenet;
 const ErrorMessage: React.FunctionComponent<ErrorMassageProps> = ({
   errorMessage,
@@ -18,10 +19,7 @@ const ErrorMessage: React.FunctionComponent<ErrorMassageProps> = ({
           <span>{customMessage}</span>
         </div>
       ) : (
-        <div className="error-conatiner">
-          <img className="icon" src="/images/error_icon.gif" alt="" />
-          <span className="message">{errorLabels.queryFailedMsg}</span>
-        </div>
+        <></>
       )}
     </>
   );

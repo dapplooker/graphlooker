@@ -64,6 +64,7 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
 
   React.useEffect(() => {
     if (parsed.uri && parsed.e) {
+
       const endpointEncoded = parsed.uri;
       const endpoint = decodeURIComponent(`${endpointEncoded}`);
       const entity = parsed.e;

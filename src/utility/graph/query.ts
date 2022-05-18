@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 import Constants from '../constant';
-import { ColumnProps } from '../interface/props';
+import { ColumnProps, Allfilters } from '../interface/props';
 import Utility from '../utility';
 
 const label = Constants.FILTERLABELS.dataTypeLabels;
@@ -39,11 +39,13 @@ export const getAllAttributes = (entity: string) => {
     `;
 };
 
+
 export const getGraphDataForID = (columnNames: ColumnProps[], entity: string, filterID: string) => {
   let queryData = ` `;
   const selectedEntity = Utility.makePluralChanges(entity);
   for (let index = 0; index < columnNames.length; ++index) {
     const element = columnNames[index];
+
     if (element.name === commonLables.ID) {
       continue;
     }
@@ -163,6 +165,47 @@ count = required number of records
 whereId = ID from where we need data
 errorMsg = specific error msg
 */
+export const getCombinedFilterData = (
+  columnNames: ColumnProps[],
+  entity: any,
+  allFilters: Allfilters[],
+) => {
+  const selectedEntity = Utility.makePluralChanges(entity);
+  let columnNameWithFilter: string = "";
+  let inputValue: any = "";
+
+  allFilters[0].columnName && allFilters[0].filterName ? columnNameWithFilter = JSON.stringify(allFilters[0].columnName) + JSON.stringify(allFilters[0].filterName) : columnNameWithFilter = "";
+  columnNameWithFilter = columnNameWithFilter.replaceAll('""', '')
+  inputValue = allFilters[0].inputName;
+  // columnNameWithFilter = JSON.stringify(columnNameWithFilter)
+  let queryData = ` `;
+  for (let index = 0; index < columnNames.length; ++index) {
+    const element = columnNames[index];
+    if (element.name === commonLables.ID) {
+      continue;
+    }
+    if (
+      (element.type === label.LIST ||
+        element.type === label.OBJECT ||
+        element.type === label.NON_NULL)
+    ) {
+      //element.name = column name
+      queryData = queryData + `${element.name} { ${commonLables.ID} } `;
+    } else {
+      queryData = queryData + `${element.name} `;
+    }
+  }
+  console.log(`${selectedEntity}(where: {${columnNameWithFilter.slice(1, -1)}:${inputValue}}  )`)
+  return gql`
+    query {
+      entity: ${selectedEntity}(where: {${columnNameWithFilter.slice(1, -1)}:${inputValue}}  ){
+        id      
+        ${queryData}
+        }
+    }
+    `;
+  // return ()
+};
 
 export const getDataQuery = (
   columnNames: ColumnProps[],
