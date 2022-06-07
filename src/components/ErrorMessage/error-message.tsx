@@ -3,6 +3,7 @@ import { ErrorMassageProps } from '../../utility/interface/props';
 import './error-message.scss';
 import { customMessages } from '../../utility/utility';
 import Constants from '../../utility/constant';
+
 const errorLabels = Constants.LABELS.errorComponenet;
 const ErrorMessage: React.FunctionComponent<ErrorMassageProps> = ({
   errorMessage,

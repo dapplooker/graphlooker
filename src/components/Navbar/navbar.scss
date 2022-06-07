@@ -2,12 +2,12 @@
 @import 'src/utility/theme/light-theme.scss';
 @import '../../utility/theme/variable.scss';
 
-.toolbar {
+.toolbarn {
   width: 100%;
   background-color: var(--baseColor);
   box-shadow: var(--navbarBoxShadow);
 
-  &.toolbar-padding {
+  &.toolbarn-padding {
     padding: 0;
   }
 

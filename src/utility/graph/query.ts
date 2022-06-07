@@ -14,6 +14,7 @@ query {
   }
 }
 `
+
 export const getNetworkName = (DeploymentId: any) => {
   
   return gql`
@@ -59,6 +60,7 @@ export const getAllAttributes = (entity: string) => {
         }
     `;
 };
+
 
 export const getGraphDataForID = (columnNames: ColumnProps[], entity: string, filterID: string) => {
   let queryData = ` `;

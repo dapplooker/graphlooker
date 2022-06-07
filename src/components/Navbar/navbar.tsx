@@ -26,7 +26,7 @@ const Navbar: React.FunctionComponent<{}> = (props) => {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-          <Toolbar className="toolbar toolbar-padding">
+          <Toolbar className="toolbarn toolbarn-padding">
             <div className="menu-items">
               {theme === label.LIGHT_THEME_LABEL ? (
                 <img

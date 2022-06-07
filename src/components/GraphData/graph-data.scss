@@ -156,7 +156,18 @@
     flex-shrink: 0;
   }
 }
-
+.btn-view-query {
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 1100;
+  padding: $size7;
+  background: var(--drawerToggleIconBackground);
+  border: none;
+  border-radius: $size5;
+  position: absolute;
+  right: 120px;
+  top: 13px;
+}
 @media screen and (max-width: 600px) {
   .toolbar {
     .menu-container {

@@ -62,9 +62,11 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
 
   const queryDataGlobalState = useSelector((state: QueryDataState) => state.queryState.query);
   const [errorMsg, setErrorMsg] = useState('');
+  console.log(getGraphDataForID(listOfattributes, selectedEntity, `${parsed.id}`));
 
   const getBoardDataAsQuery = (error: string) => {
     if (parsed.id) {
+      console.log(getGraphDataForID(listOfattributes, selectedEntity, `${parsed.id}`));
       return getGraphDataForID(listOfattributes, selectedEntity, `${parsed.id}`);
     }
 
@@ -81,8 +83,24 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
         error
       );
     }
+
+    const skip = checkForPagination();
     if (parsed.c) {
-      const skip = checkForPagination();
+      console.log(parsed.c);
+      const val = getStringFilterGraphData(
+        listOfattributes,
+        selectedEntity,
+        `${parsed.f}`,
+        `${parsed.c}`,
+        `${parsed.i}`,
+        skip,
+        `${parsed.s}`,
+        100,
+        '',
+        error
+      );
+      console.log(val.loc?.source.body);
+
       return getStringFilterGraphData(
         listOfattributes,
         selectedEntity,
