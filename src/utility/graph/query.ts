@@ -1,22 +1,26 @@
 import { gql } from '@apollo/client';
 import Constants from '../constant';
-import { ColumnProps } from '../interface/props';
+import { Allfilters, ColumnProps } from '../interface/props';
 import Utility from '../utility';
 
 const label = Constants.FILTERLABELS.dataTypeLabels;
 const commonLables = Constants.LABELS.commonLables;
 const regex = Constants.REGEX;
 
-export const queryToGetDeploymentId=gql`
-query {
-  _meta {
-    deployment
+export const queryToGetDeploymentId = gql`
+  query {
+    _meta {
+      deployment
+    }
   }
+<<<<<<< HEAD
 }
 `
 
+=======
+`;
+>>>>>>> e23f3a523ba50f84c042084f7626b4b50461594c
 export const getNetworkName = (DeploymentId: any) => {
-  
   return gql`
     query {
       indexingStatuses(subgraphs:["${DeploymentId}"]) {
@@ -39,7 +43,6 @@ export const getAllEntities = gql`
     }
   }
 `;
-
 
 export const getAllAttributes = (entity: string) => {
   entity = Utility.getProperEntity(entity);
@@ -109,21 +112,18 @@ errorMsg = specific error msg
 export const getStringFilterGraphData = (
   columnNames: ColumnProps[],
   entity: string,
-  filterOption: string,
-  attributeName: string,
-  userInputValue: any,
   skip: number,
-  sortType: string,
   count: number,
   whereId: string,
-  errorMsg: string
+  errorMsg: string,
+  listOfFilters: Allfilters[]
 ) => {
+  let attributeName: string = ``;
+  let sortType: string = ``;
   let queryData = ` `;
   const selectedEntity = Utility.makePluralChanges(entity);
-  if (filterOption === commonLables.UNDERSCORE_IS) {
-    filterOption = commonLables.EMPTY;
-  }
-  let columnNameWithFilter = attributeName.concat(filterOption);
+
+  // let columnNameWithFilter = attributeName.concat(filterOption);
   for (let index = 0; index < columnNames.length; ++index) {
     const element = columnNames[index];
     if (element.name === commonLables.ID) {
@@ -141,36 +141,57 @@ export const getStringFilterGraphData = (
     }
   }
 
+  let filterQuery = ``;
+  listOfFilters?.forEach((filters) => {
+    if (filters.filterName === commonLables.UNDERSCORE_IS) {
+      filters.filterName = commonLables.EMPTY;
+    }
+    if (filters.filterName && filters.filterName.includes(',')) {
+      if (typeof filters.inputValue === 'string') {
+      }
+      if (filters.inputValue.length) {
+        filterQuery = `${filterQuery} ${filters.columnName}_gte :${filters.inputValue[0]}, ${filters.columnName}_lte :${filters.inputValue[1]}`;
+      }
+    } else if (
+      typeof filters.inputValue === 'string' &&
+      regex.CHECK_NUMBER_REGEX.test(filters.inputValue)
+    ) {
+      filters.inputValue = Number(filters.inputValue);
+    } else if (filters.inputValue === 'true' || filters.inputValue === 'false') {
+      filters.inputValue = filters.inputValue === 'true';
+    } else if (filters.columnName && filters.filterName === 'sort') {
+      attributeName = filters.columnName;
+      sortType = filters.inputValue;
+    } else {
+      filters.inputValue =
+        commonLables.DOUBLE_QUOTES + filters.inputValue + commonLables.DOUBLE_QUOTES;
+    }
+    if (
+      (filters.columnName &&
+        filters.filterName !== 'sort' &&
+        filters.filterName &&
+        !filters.filterName.includes(',')) ||
+      filters.filterName === ''
+    ) {
+      filterQuery = `${filterQuery} ${
+        filters.columnName && filters.columnName.concat(filters.filterName)
+      } :${filters.inputValue}`;
+    }
+  });
+  //if sort type is undefined set to desc by default
   if (sortType === commonLables.UNDEFINED) {
     sortType = commonLables.DESC;
   }
 
-  if (userInputValue.includes(',')) {
-    let splitInputValues = userInputValue.split(',');
-    return gql`
-      query {
-        entity: ${selectedEntity}(first:${count}, skip:${skip},orderBy:${attributeName}, orderDirection: ${sortType},
-          where: {${attributeName}_gte :${splitInputValues[0]}, ${attributeName}_lte :${splitInputValues[1]}, id_gt:"${whereId}"}){
-          id      
-          ${queryData}
-          }
-      }
-      `;
-  }
-
-  if (userInputValue === commonLables.EMPTY || userInputValue === commonLables.NULL) {
-    userInputValue = commonLables.NULL;
-  } else if (regex.CHECK_NUMBER_REGEX.test(userInputValue)) {
-    userInputValue = Number(userInputValue);
-  } else if (userInputValue === 'true' || userInputValue === 'false') {
-    userInputValue = userInputValue === 'true';
-  } else {
-    userInputValue = commonLables.DOUBLE_QUOTES + userInputValue + commonLables.DOUBLE_QUOTES;
-  }
+  //if columnName or attribute is not present
+  let sortQuery =
+    !(attributeName === 'undefined') && attributeName
+      ? `orderBy:${attributeName}, orderDirection: ${sortType}`
+      : ``;
 
   return gql`
       query {
-        entity: ${selectedEntity}(first:${count}, skip:${skip},orderBy:${attributeName}, orderDirection: ${sortType},where: {${columnNameWithFilter} :${userInputValue}, id_gt:"${whereId}"}){
+        entity: ${selectedEntity}(first:${count}, skip:${skip},${sortQuery},where: {${filterQuery}, id_gt:"${whereId}"}){
           id      
           ${queryData}
           }
@@ -249,8 +270,8 @@ errorMsg = specific error msg
 export const getSortedDataQuery = (
   columnNames: ColumnProps[],
   entity: string,
-  sortType: string,
-  attributeName: string,
+  sortType: string | (string | null)[] | null | number,
+  attributeName: string | (string | null)[] | null | number,
   skip: number,
   count: number,
   whereId: string,

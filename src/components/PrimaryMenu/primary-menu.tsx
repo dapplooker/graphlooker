@@ -9,6 +9,7 @@ import { EndpointState, EntityState } from '../../utility/redux/state';
 import { useSelector } from 'react-redux';
 import FilterMenu from '../FilterMenu/filter-menu';
 import Constants from '../../utility/constant';
+import Utility from '../../utility/utility';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 
@@ -23,21 +24,9 @@ const PrimaryMenu: React.FunctionComponent<PrimaryMenuProps & RouteComponentProp
   const label = Constants.LABELS.commonLables;
   const urlLabels = Constants.LABELS.commonUrls;
   const filterLabels = Constants.FILTERLABELS.dataTypeLabels;
-
   let selectedEntity: string;
   const endpoint = useSelector((state: EndpointState) => state.graphEndpoint.endpoint);
   selectedEntity = useSelector((state: EntityState) => state.selectedEntity.entity);
-
-  //Sort Data (Ascending /Descending) when Attribute Clicked
-  const sortDataAscDesc = (sortType: string, columnName: string) => {
-    const URI = encodeURIComponent(endpoint);
-    const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
-    // if (parsed.f && parsed.i) {
-    return (window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&s=${sortType}&c=${columnName}`);
-    // } else {
-    //   return (window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&s=${sortType}&c=${columnName}`);
-    // }
-  };
 
   const [anchorFiterEl, setAnchorFiterEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorFiterEl);
@@ -46,6 +35,19 @@ const PrimaryMenu: React.FunctionComponent<PrimaryMenuProps & RouteComponentProp
   };
   const handleCloseMenu = () => {
     setAnchorFiterEl(null);
+  };
+  //Sort Data (Ascending /Descending) when Attribute Clicked
+  const sortDataAscDesc = async (sortType: string, columnName: string) => {
+    const URI = encodeURIComponent(endpoint);
+    const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
+    return (window.location.href = `${
+      urlLabels.BASE_URL
+    }uri=${URI}&e=${entity}&th=${theme}&filterObj=${Utility.getAllFilters(
+      Constants.LABELS.filterTypes.SORT,
+      columnName,
+      sortType,
+      parsed.filterObj
+    )}`);
   };
 
   const getSortingMenu = () => {

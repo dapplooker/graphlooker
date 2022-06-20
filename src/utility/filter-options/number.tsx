@@ -1,4 +1,5 @@
 import Constants from '../constant';
+import Utility from '../utility';
 
 const label = Constants.LABELS.commonLables;
 
@@ -10,16 +11,25 @@ export const filterNumberIs = (
   selectedFilter: string,
   firstInputNumber: string,
   secondInputNumber: string,
-  theme: any
+  theme: any,
+  listOFFiltersInStringify: string
 ) => {
-  let userInputValue = label.EMPTY;
+  let userInputValue: any;
   if (secondInputNumber === label.EMPTY) {
     userInputValue = firstInputNumber;
   } else {
-    userInputValue = firstInputNumber.concat(',', secondInputNumber);
+    userInputValue = [];
+    userInputValue.push(firstInputNumber);
+    userInputValue.push(secondInputNumber);
   }
 
   const URI = encodeURIComponent(endpoint);
   const entity = selectedEntity.charAt(0).toLowerCase() + selectedEntity.slice(1);
-  window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&f=${selectedFilter}&i=${userInputValue}&c=${columnName}`;
+  let filtersInStringify = Utility.getAllFilters(
+    selectedFilter,
+    columnName,
+    userInputValue,
+    listOFFiltersInStringify
+  );
+  window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}&filterObj=${filtersInStringify}`;
 };

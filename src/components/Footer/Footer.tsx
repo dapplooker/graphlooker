@@ -38,11 +38,11 @@ const Footer: React.FunctionComponent<any> = () => {
             </a>
           </div>
 
-          <div className="icon">
+          {/* <div className="icon">
             <a href={Constants.URL.MEDIUM_BLOG} target="_blank" rel="noreferrer">
               <MediumSVG />
             </a>
-          </div>
+          </div> */}
 
           <div className="icon">
             <a href={Constants.URL.TELEGRAM} target="_blank" rel="noreferrer">
@@ -56,11 +56,11 @@ const Footer: React.FunctionComponent<any> = () => {
             </a>
           </div>
 
-          <div className="icon">
+          {/* <div className="icon">
             <a href={Constants.URL.YOUTUBE} target="_blank" rel="noreferrer">
               <YoutubeSVG />
             </a>
-          </div>
+          </div> */}
         </div>
 
         <div className="copyright-info">

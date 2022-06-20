@@ -1,5 +1,13 @@
 @import '../../utility/theme/variable.scss';
 .FilterData {
+  max-width: calc(100vw - 310px);
+  overflow: auto;
+  padding: $size3;
+  margin: $size3;
+}
+.FilterData-drawer-open {
+  max-width: 100vw;
+  overflow: auto;
   padding: $size3;
   margin: $size3;
 }

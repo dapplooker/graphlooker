@@ -14,7 +14,7 @@ const NumberFilterMenu: React.FunctionComponent<
 > = ({ attributeName, location }) => {
   const parsed = queryString.parse(location.search);
   const theme = parsed.th;
-
+  let listOfFilters = String(parsed.filterObj);
   const label = Constants.LABELS.commonLables;
   const filterOptionLabel = Constants.FILTERLABELS.filterOptionLabels;
 
@@ -98,7 +98,8 @@ const NumberFilterMenu: React.FunctionComponent<
               optionSelected,
               firstInputNumber,
               secondInputNumber,
-              theme
+              theme,
+              listOfFilters
             )
           }
         >

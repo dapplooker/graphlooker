@@ -16,6 +16,7 @@ import queryString from 'query-string';
 import Constants from '../../utility/constant';
 import DownloadPage from './download-page';
 import Utility, { sortData } from '../../utility/utility';
+import { Allfilters } from '../../utility/interface/props';
 
 const ExportToCSV: React.FunctionComponent<any> = () => {
   const [entityId, setEntityId] = useState<any[]>([]);
@@ -46,31 +47,34 @@ const ExportToCSV: React.FunctionComponent<any> = () => {
   //<------- functionality for dynamic query ------->
 
   function getCsvDataResursively(error: string) {
+    let listOfFilters: Allfilters[] = [];
+    let sortFilter: Allfilters[] = [];
+    if (parsed && parsed.filterObj && typeof parsed.filterObj === 'string') {
+      listOfFilters = JSON.parse(parsed.filterObj);
+      sortFilter = listOfFilters.filter((data) => data.filterName === 'sort');
+    }
     if (parsed.id) {
       return getGraphDataForID(listOfattributes, selectedEntity, `${parsed.id}`);
-    } else if (!parsed.f && !parsed.i && parsed.s) {
+    } else if (listOfFilters && listOfFilters.length === 1 && sortFilter && sortFilter.length) {
       return getSortedDataQuery(
         listOfattributes,
         selectedEntity,
-        `${parsed.s}`,
-        `${parsed.c}`,
+        sortFilter[0].inputValue,
+        sortFilter[0].columnName,
         0,
         1000,
         entityId.length > 0 ? entityId[entityId.length - 1] : '',
         error
       );
-    } else if (parsed.c) {
+    } else if (listOfFilters.length) {
       return getStringFilterGraphData(
         listOfattributes,
         selectedEntity,
-        `${parsed.f}`,
-        `${parsed.c}`,
-        `${parsed.i}`,
         0,
-        `${parsed.s}`,
         1000,
         entityId.length > 0 ? entityId[entityId.length - 1] : '',
-        error
+        error,
+        listOfFilters
       );
     }
 
@@ -86,6 +90,7 @@ const ExportToCSV: React.FunctionComponent<any> = () => {
   }
 
   //<--------------- Export Handler --------------->
+  const [downloadOnce, setDownloadOnce] = useState(true);
 
   const exportClickHandler = async () => {
     let data: any;
@@ -114,12 +119,15 @@ const ExportToCSV: React.FunctionComponent<any> = () => {
       setSortedDataState([...sortedDataState, ...sortedData]);
     }
 
-    if (sortedData.length === 0) {
-      CSV_LINK_REF?.current?.link.click();
-    }
+    // if (sortedData.length === 0) {
+    //   CSV_LINK_REF?.current?.link.click();
+    // }
 
     if (downloadRef === null) {
       setDownloadRef(true);
+    }
+    if (downloadOnce === false) {
+      setDownloadRef(false);
     }
   };
 
@@ -137,9 +145,10 @@ const ExportToCSV: React.FunctionComponent<any> = () => {
       regex.test(sortedDataState.length / 1000)
     ) {
       exportClickHandler();
-    } else if (downloadRef && !errorMsg) {
+    } else if (downloadRef && !errorMsg && downloadOnce) {
       CSV_LINK_REF?.current?.link.click();
       setDownloadRef(false);
+      setDownloadOnce(false);
     }
   }, [entityId, downloadRef, errorMsg]);
 
