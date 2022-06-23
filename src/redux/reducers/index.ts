@@ -5,6 +5,7 @@ import {
   entityReducer,
   graphNameReducer,
   queryReducer,
+  graphiqlEditorReducer,
 } from './endpoint-reducer';
 import { loadingReducer } from './loading-reducer';
 import { themeReducer } from './theme-reducer';
@@ -17,4 +18,6 @@ export const reducers = combineReducers({
   dataLoading: loadingReducer,
   queryState: queryReducer,
   graphName:graphNameReducer,
+  graphiqlEditor:graphiqlEditorReducer,
+
 });

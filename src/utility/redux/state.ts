@@ -1,3 +1,11 @@
+
+interface GraphiqlEditor {
+  editorState: boolean;
+}
+export interface graphiqlEditorState {
+  graphiqlEditor: GraphiqlEditor;
+}
+
 interface ThemeSelector {
   theme: string;
 }

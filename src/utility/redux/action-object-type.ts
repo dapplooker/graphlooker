@@ -2,6 +2,10 @@ export interface SubgraphNetworkActionObjectTypes {
   type: string;
   payload: string;
 }
+export interface GraphiqlEditorActionObjectTypes {
+  type: boolean;
+  payload: boolean;
+}
 export interface ThemeActionObjectTypes {
   type: string;
   payload: string;

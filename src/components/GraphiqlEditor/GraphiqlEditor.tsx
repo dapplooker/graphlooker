@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { UserProps } from '../../utility/interface/props';
 import GraphiQL from 'graphiql';
 import './GraphiqlEditor.scss';
 import 'graphiql/graphiql.min.css';
+import Constants from '../../utility/constant';
 
 const link = 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2';
-const query = `{
-    _meta {
-      deployment
-      __typename
+
+const buttonDisable = document.getElementsByClassName('toolbar-button');
+ const GraphiqlEditor: React.FunctionComponent<UserProps> = ({ props }): JSX.Element => {
+  useEffect(() => {
+    if (buttonDisable && buttonDisable[3]) {
+     
+      let historyButton: HTMLElement = document.getElementsByClassName('toolbar-button')[3] as HTMLElement;
+      let mergeButton: HTMLElement = document.getElementsByClassName('toolbar-button')[1] as HTMLElement;
+      let docExplorerHide: HTMLElement = document.getElementsByClassName('docExplorerShow')[0] as HTMLElement;
+
+      docExplorerHide.style.display='none';
+      historyButton.style.display = 'none';
+      mergeButton.style.display = 'none';
     }
-  }`;
-const GraphiqlEditor: React.FunctionComponent<UserProps> = ({ props }): JSX.Element => {
+  }, [props && props.loc]);
+
   return (
     <>
-      <div className="toolbarEditor">
+      <div className="graphiQLEditor">
         <GraphiQL
           fetcher={async (graphQLParams) => {
             const data = await fetch(link, {
@@ -29,13 +39,14 @@ const GraphiqlEditor: React.FunctionComponent<UserProps> = ({ props }): JSX.Elem
 
             return data.json().catch(() => data.text());
           }}
-          // readOnly={true}defaultVariableEditorOpen
-          //sdangerouslyAssumeSchemaIsValid={true}
-          //headerEditorEnabled={false}
           // beforeTopBarContent={<Logo width={'60px'} height={'50px'} />}
           editorTheme={'dracula'}
           readOnly={true}
-          query={query}
+          defaultVariableEditorOpen={false}
+          defaultSecondaryEditorOpen={false}
+          docExplorerOpen={false}
+          headerEditorEnabled={false}
+          query={props && props.loc ? props.loc.source.body : Constants.ERROR_MESSAGES.QUERY_ERROR}
         />
       </div>
     </>

@@ -13,13 +13,8 @@ export const queryToGetDeploymentId = gql`
       deployment
     }
   }
-<<<<<<< HEAD
-}
-`
-
-=======
 `;
->>>>>>> e23f3a523ba50f84c042084f7626b4b50461594c
+
 export const getNetworkName = (DeploymentId: any) => {
   return gql`
     query {

@@ -24,6 +24,7 @@ import {
   setGraphEntity,
   setGraphEndpoint,
   setSubgraphName,
+  setGraphiQlEditor,
 } from '../../redux/actions/endpoint-action';
 import DataBoard from '../DataBoard/data-board';
 import Constants from '../../utility/constant';
@@ -85,7 +86,7 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
     window.location.href = Constants.ROUTES.HOME_ROUTE;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const [openEditor,setOpenEditor]=useState(false);
   const [deploymentId, setDeploymentId] = useState('');
   const [subgraphNetworkName, setSubgraphNetworkName] = useState('');
   const { data: deploymentData } = useQuery(queryToGetDeploymentId);
@@ -173,6 +174,9 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
       </List>
     </div>
   );
+  useEffect(()=>{
+    dispatch(setGraphiQlEditor(openEditor));
+  },[openEditor])  
 
   return (
     <>
@@ -250,8 +254,8 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
               {graphName}
               {subgraphNetworkName ? `(${subgraphNetworkName})` : ''}
             </h2>
-            <Tooltip title={label.SWITCH_THEME}>
-              <button className="btn-view-query">View Query</button>
+            <Tooltip title={label.VIEW_QUERY}>
+              <button className="btn-view-query icons" onClick={()=> openEditor ? setOpenEditor(false):setOpenEditor(true)}>View </button>
             </Tooltip>
             <Tooltip title={label.SWITCH_THEME}>
               <div className="theme-icon" onClick={handleToggleTheme}>
@@ -314,7 +318,7 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
             {drawer}
           </Drawer>
         </Box>
-        <DataBoard drawerOpen={drawerOpen}></DataBoard>
+        <DataBoard drawerOpen={drawerOpen} ></DataBoard>
       </div>
       <div>
         <Footer />

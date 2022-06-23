@@ -6,6 +6,7 @@ import {
   AttributesState,
   QueryDataState,
   GraphNameState,
+  graphiqlEditorState,
 } from '../../utility/redux/state';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { useLazyQuery } from '@apollo/client';
@@ -38,6 +39,7 @@ import ExportButton from '../ExportToCSV/ExportButton';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import NoRecords from '../NoRecords/NoRecords';
 import FilterData from '../FilterData/FilterData';
+import GraphiqlEditor from '../GraphiqlEditor/GraphiqlEditor';
 
 const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteComponentProps<any>> = ({
   drawerOpen,
@@ -56,14 +58,18 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
   const theme = parsed.th;
   let listOfFilters = String(parsed.filterObj);
   const dispatch = useDispatch();
-
+     
+  const openEditor=useSelector((state:graphiqlEditorState)=>state.graphiqlEditor.editorState);
+  console.log("openEditor = "+openEditor)
+  
   const label = Constants.LABELS.commonLables;
   const urlLabels = Constants.LABELS.commonUrls;
   const dataTypeLabel = Constants.FILTERLABELS.dataTypeLabels;
 
   const queryDataGlobalState = useSelector((state: QueryDataState) => state.queryState.query);
   const [errorMsg, setErrorMsg] = useState('');
-  console.log(getGraphDataForID(listOfattributes, selectedEntity, `${parsed.id}`));
+  const[queryData,setQueryData]=useState<any | null>(null);
+  // console.log(getGraphDataForID(listOfattributes, selectedEntity, `${parsed.id}`));
 
   const getBoardDataAsQuery = (error: string) => {
     let listOfFilters: Allfilters[] = [];
@@ -120,11 +126,15 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
     }
     return getDataQuery(listOfattributes, selectedEntity, 100, 0, queryDataGlobalState, '', error);
   };
+  
   useEffect(() => {
     getBoardData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  
+   
+   setQueryData(getBoardDataAsQuery(errorMsg));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+ 
   const checkForPagination = () => {
     if (parsed.p) {
       const paginateNumber: string = `${parsed.p}`;
@@ -220,13 +230,16 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
       <div className={drawerOpen ? 'FilterData' : 'FilterData-drawer-open'}>
         {listOfFilters !== 'undefined' ? <FilterData props={listOfFilters} /> : null}
       </div>
-
+     
       <ExportButton rows={rows} />
+     {openEditor ? <GraphiqlEditor props={queryData}/> : 
+        
+      
       <div className="all-graph-data">
         <div className={`table-conatiner ${drawerOpen ? 'drawer-open-table-length' : label.EMPTY}`}>
           <Table stickyHeader aria-label="sticky table" className="data-table">
-            <TableHead>
-              <TableRow>
+            <TableHead> 
+             <TableRow>
                 {data &&
                   listOfattributes.map((item, i) => (
                     <TableCell
@@ -377,6 +390,7 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
           </div>
         ) : null}
       </div>
+}
     </>
   );
 };

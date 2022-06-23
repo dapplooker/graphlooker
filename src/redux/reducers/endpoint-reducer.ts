@@ -3,19 +3,40 @@ import {
   EntityActionObjectTypes,
   AttributesActionObjectTypes,
   QueryActionObjectTypes,
-  SubgraphNetworkActionObjectTypes
+  SubgraphNetworkActionObjectTypes,
+  GraphiqlEditorActionObjectTypes
 } from '../../utility/redux/action-object-type';
-import { EndpointActionTypes } from '../../utility/redux/action-types';
+import { EndpointActionTypes, GraphiqlEditorActionTypes } from '../../utility/redux/action-types';
 
 const ENDPOINT_INITIAL_STATE = {
   endpoint: '',
 };
+
+const GraphiQL_INTIAL_STATE={
+  editorState:false,
+}
+
+export const graphiqlEditorReducer=(
+  state = GraphiQL_INTIAL_STATE,
+  { type, payload }: GraphiqlEditorActionObjectTypes
+) => {
+  switch (type) {
+    case GraphiqlEditorActionTypes.SET_EDITOR_STATE:
+      return { ...state, editorState: payload };
+    default:
+      return state;
+  }
+}
+
+
+
+
 export const graphNameReducer=(
   state = ENDPOINT_INITIAL_STATE,
   { type, payload }: SubgraphNetworkActionObjectTypes
 ) => {
   switch (type) {
-    case EndpointActionTypes. SET_SUBGRAPH_NETWORKNAME:
+    case EndpointActionTypes.SET_SUBGRAPH_NETWORKNAME:
       return { ...state, subgraphName: payload };
     default:
       return state;

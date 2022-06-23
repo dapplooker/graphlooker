@@ -97,6 +97,7 @@ export default class Constants {
       COLLAPSE: 'Collapse',
       EXPAND: 'Expand',
       SWITCH_THEME: 'Switch Theme',
+      VIEW_QUERY:'View Query',
       DOWNLOAD: 'Download to CSV',
       SORT_ASC: 'Sort Ascending',
       SORT_DESC: 'Sort Descending',
@@ -227,6 +228,7 @@ export default class Constants {
     UNEXPECTED:
       'Unexpected error encountered, please check if you are entering correct subgraph api endpoint.',
     INVALID: 'Subgraph api endpoint you are entering is invalid or not allowed',
+    QUERY_ERROR:'Query is not fetched !'
   };
 
   public static ROUTES = {
