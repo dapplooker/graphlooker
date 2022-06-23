@@ -42,23 +42,4 @@
     }
   }
 
-  .social-icons {
-    display: flex;
-    flex-direction: row-reverse;
-    position: absolute;
-    left: 210px;
-    display: flex;
-    justify-content: space-around;
-    box-sizing: border-box;
-    padding: $size7;
-
-    .icon {
-      width: 33px;
-      height: 33px;
-      border-radius: 6px;
-      margin-right: 10px;
-      padding: 2px;
-      background-color: #fff;
-    }
-  }
 }

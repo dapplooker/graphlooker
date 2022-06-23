@@ -8,7 +8,8 @@ import Constants from '../../utility/constant';
 const link = 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2';
 
 const buttonDisable = document.getElementsByClassName('toolbar-button');
- const GraphiqlEditor: React.FunctionComponent<UserProps> = ({ props }): JSX.Element => {
+
+const GraphiqlEditor: React.FunctionComponent<UserProps> = ({ props }): JSX.Element => {
   useEffect(() => {
     if (buttonDisable && buttonDisable[3]) {
      
