@@ -73,7 +73,7 @@ export default class Constants {
 
   public static LABELS = {
     commonLables: {
-      TITLE: 'CosmoDapp - Browse, Filter, Export Subgraph Data',
+      TITLE: 'GraphLooker - Real-time Subgraph Explorer & Visualizer',
       FILTER_BY_COL: 'Filter by column',
       ASC: 'asc',
       DESC: 'desc',
@@ -101,7 +101,7 @@ export default class Constants {
       DOWNLOAD: 'Download to CSV',
       SORT_ASC: 'Sort Ascending',
       SORT_DESC: 'Sort Descending',
-      DESC_TITLE: 'Browse, filter, export subgraph data.',
+      DESC_TITLE: 'GraphLooker - Real-time Subgraph Explorer & Visualizer',
       ENTITY_REFERENCE: 'This column is a reference of',
       NULL: 'null',
       DOUBLE_QUOTES: '"',

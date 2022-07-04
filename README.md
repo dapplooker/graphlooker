@@ -1,4 +1,4 @@
-# What is CosmoDapp? 🧠
+# What is GraphLooker? 🧠
 
 Currently, there is no generic subgraph frontend Dapp to explore, browse and filter on subgraphs data. Our mission is empower Graph different actors like indexers, delegators, curators, users to easily understand subgraph data. The tool helps indexers, delegators, curators and TheGraph users easily browse subgraph data, download data to CSV and perform simple to complex operations like sorting, filtering with simplest of UX.
 
@@ -19,7 +19,7 @@ Currently, there is no generic subgraph frontend Dapp to explore, browse and fil
 - Applying filter based on the type of the data of that particular column. Different type of filters are supported based on data type of attribute.
 - Switch theme feature that enables users to select their own theme either dark or light according to their convenience.
 
-Checkout https://cosmodapp.com/ and let us know your views and valuable feedbacks.
+Checkout https://graphlooker.com/ and let us know your views and valuable feedbacks.
 
 ## How to fork subgraph-explorer
 

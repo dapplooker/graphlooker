@@ -34,9 +34,6 @@ import ErrorMessage from '../ErrorMessage/error-message';
 import { LoadingState } from '../../utility/redux/state';
 import humanizeString from 'humanize-string';
 import Footer from '../Footer/Footer';
-import { ReactComponent as DiscordSVG } from '../../svg/discord.svg';
-import { ReactComponent as TwitterSVG } from '../../svg/twitter.svg';
-import { ReactComponent as TelegramSVG } from '../../svg/telegram.svg';
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -202,9 +199,9 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
               >
                 <a href={Constants.ROUTES.HOME_ROUTE}>
                   <img
-                    src="/images/cosmoDapp_white_text.png"
+                    src="/images/GraphLooker_white_text.png"
                     height="50px"
-                    alt="cosmodapp-icon"
+                    alt="GraphLooker-icon"
                   ></img>
                 </a>
               </Box>
@@ -231,7 +228,7 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
                 </div>
               )}
             </div>
-            <div className="social-icons">
+            {/* <div className="social-icons">
               <div className="icon">
                 <a href="https://discord.com/invite/FWyNJtEyxa" target="_blank" rel="noreferrer">
                   <DiscordSVG height={30} width={35} />
@@ -249,7 +246,7 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
                   <TwitterSVG height={30} width={35} />
                 </a>
               </div>
-            </div>
+            </div> */}
             <h2 className="graph-heading">
               {graphName}
               {subgraphNetworkName ? `(${subgraphNetworkName})` : ''}
@@ -289,9 +286,9 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
               <Box>
                 <a href={Constants.ROUTES.HOME_ROUTE}>
                   <img
-                    src="/images/cosmoDapp_theme_color_text.png"
+                    src="/images/GraphLooker_theme_color_text.png"
                     height="33px"
-                    alt="cosmodapp-icon"
+                    alt="GraphLooker-icon"
                   ></img>
                 </a>
               </Box>

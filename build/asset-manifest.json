@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.e0ae8ec5.css",
-    "main.js": "/static/js/main.e407fa57.js",
+    "main.js": "/static/js/main.f87cf713.js",
     "static/js/787.4baa31f8.chunk.js": "/static/js/787.4baa31f8.chunk.js",
     "static/media/graph-protocol.svg": "/static/media/graph-protocol.abe4f27c4dfc96f78794c291c755c386.svg",
     "static/media/twitter.svg": "/static/media/twitter.377862e352c63b8a9d922deb020f6e89.svg",
@@ -10,11 +10,11 @@
     "static/media/github.svg": "/static/media/github.3cffb315a27d1de0c48e468ee2a6dd18.svg",
     "static/media/telegram.svg": "/static/media/telegram.937b374f4f03cd1392fe7e98c6387a53.svg",
     "main.e0ae8ec5.css.map": "/static/css/main.e0ae8ec5.css.map",
-    "main.e407fa57.js.map": "/static/js/main.e407fa57.js.map",
+    "main.f87cf713.js.map": "/static/js/main.f87cf713.js.map",
     "787.4baa31f8.chunk.js.map": "/static/js/787.4baa31f8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e0ae8ec5.css",
-    "static/js/main.e407fa57.js"
+    "static/js/main.f87cf713.js"
   ]
 }

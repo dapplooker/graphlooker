@@ -20,7 +20,9 @@ const App: React.FunctionComponent<RouteComponentProps<any>> = ({ location }) =>
   let theme = parsed.th;
   const endpoint = useSelector((state: EndpointState) => state.graphEndpoint.endpoint);
   const client = new ApolloClient({
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      addTypename: false,
+    }),
     link: ApolloLink.split(
       (operation) => operation.getContext().clientName === 'subgraph-network',
       createHttpLink({ uri: Constants.QUERY_REQUEST_INDEXNODE.URL }),

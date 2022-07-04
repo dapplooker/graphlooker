@@ -9,9 +9,6 @@ import { ThemeState } from './../../utility/redux/state';
 import './navbar.scss';
 import { toggleTheme } from '../../redux/actions/theme-action';
 import Constants from '../../utility/constant';
-import { ReactComponent as DiscordSVG } from '../../svg/discord.svg';
-import { ReactComponent as TwitterSVG } from '../../svg/twitter.svg';
-import { ReactComponent as TelegramSVG } from '../../svg/telegram.svg';
 const Navbar: React.FunctionComponent<{}> = (props) => {
   const dispatch = useDispatch();
   const label = Constants.LABELS.commonLables;
@@ -30,19 +27,19 @@ const Navbar: React.FunctionComponent<{}> = (props) => {
             <div className="menu-items">
               {theme === label.LIGHT_THEME_LABEL ? (
                 <img
-                  src="/images/cosmoDapp_theme_color_text.png"
+                  src="/images/GraphLooker_theme_color_text.png"
                   height="47px"
-                  alt="cosmodapp-icon"
+                  alt="GraphLooker-icon"
                 ></img>
               ) : (
                 <img
-                  src="/images/cosmoDapp_white_text.png"
+                  src="/images/GraphLooker_white_text.png"
                   height="50px"
-                  alt="cosmodapp-icon"
+                  alt="GraphLooker-icon"
                 ></img>
               )}
 
-              <div className="social-icons">
+              {/* <div className="social-icons">
                 <div className="icon">
                   <a href="https://discord.com/invite/FWyNJtEyxa" target="_blank" rel="noreferrer">
                     <DiscordSVG height={30} width={35} />
@@ -63,7 +60,7 @@ const Navbar: React.FunctionComponent<{}> = (props) => {
                 <div>
                   <img className="beta-icon" src="/images/beta.png" alt="beta version" />
                 </div>
-              </div>
+              </div> */}
               <div className="theme-icon" onClick={handleToggleTheme}>
                 {theme === label.LIGHT_THEME_LABEL ? <DarkModeIcon /> : <LightModeIcon />}
               </div>
