@@ -58,9 +58,8 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
   const theme = parsed.th;
   let listOfFilters = String(parsed.filterObj);
   const dispatch = useDispatch();
-     
+   
   const openEditor=useSelector((state:graphiqlEditorState)=>state.graphiqlEditor.editorState);
-  console.log("openEditor = "+openEditor)
   
   const label = Constants.LABELS.commonLables;
   const urlLabels = Constants.LABELS.commonUrls;

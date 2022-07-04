@@ -4,11 +4,17 @@ import GraphiQL from 'graphiql';
 import './GraphiqlEditor.scss';
 import 'graphiql/graphiql.min.css';
 import Constants from '../../utility/constant';
+import { useSelector } from 'react-redux';
+import { EndpointState } from '../../utility/redux/state';
 
 const link = 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2';
 
+
 const buttonDisable = document.getElementsByClassName('toolbar-button');
- const GraphiqlEditor: React.FunctionComponent<UserProps> = ({ props }): JSX.Element => {
+const GraphiqlEditor: React.FunctionComponent<UserProps> = ({ props }): JSX.Element => {
+const endpoint = useSelector((state: EndpointState) => state.graphEndpoint.endpoint);
+
+
   useEffect(() => {
     if (buttonDisable && buttonDisable[3]) {
      
@@ -27,7 +33,7 @@ const buttonDisable = document.getElementsByClassName('toolbar-button');
       <div className="graphiQLEditor">
         <GraphiQL
           fetcher={async (graphQLParams) => {
-            const data = await fetch(link, {
+            const data = await fetch(endpoint, {
               method: 'POST',
               headers: {
                 Accept: 'application/json',
