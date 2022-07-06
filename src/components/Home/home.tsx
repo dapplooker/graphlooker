@@ -86,7 +86,7 @@ const Home: React.FunctionComponent<RouteComponentProps<any>> = ({ history }) =>
                 {commonLables.EXPLORE}
               </button>
 
-              {/* <p className="explore-msg">{Constants.LABELS.commonLables.DESC_TITLE}</p> */}
+              <p className="explore-msg">{Constants.LABELS.commonLables.DESC_TITLE}</p>
 
               {isError && endpoint.length > 0 ? (
                 <ErrorMessage
