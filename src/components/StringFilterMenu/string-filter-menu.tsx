@@ -50,7 +50,7 @@ const StringFilterMenu: React.FunctionComponent<
           ))}
         </Select>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onKeyDown={(e) => e.stopPropagation()}>
         {selectStringMenu === filterOptionLabel.IS_EMPTY ||
         selectStringMenu === filterOptionLabel.NOT_EMPTY ? (
           label.EMPTY
