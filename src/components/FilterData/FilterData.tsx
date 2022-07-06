@@ -5,13 +5,33 @@ import { Allfilters, UserProps } from '../../utility/interface/props';
 import Constants from '../../utility/constant';
 
 var listOfFilters: Allfilters[] = [];
-
+var newListOfFilters: Allfilters[] = [];
 const FilterData: React.FunctionComponent<UserProps> = ({ props }): JSX.Element => {
   listOfFilters = props && JSON.parse(props);
 
   const handleDelete = (index: number) => () => {
-    listOfFilters.splice(index);
+    //first removed the clicked filter
+    listOfFilters.splice(index, 1);
+    //logic of triming the url
+    let url = window.location.href;
+    let indexOfFilter = url.indexOf('filterObj');
+    url = url.substring(0, indexOfFilter - 1);
+    //if the removed filter was the last filter left in the array
+    if (listOfFilters.length === 0) {
+      window.location.href = url;
+      return;
+    }
+    //making url from new filters array
+    let remainingFilters = '';
+    function myFunction(item: any) {
+      const thisJSON = JSON.stringify(item);
+      remainingFilters = remainingFilters + ',' + thisJSON;
+    }
+    listOfFilters.forEach(myFunction);
+    url = `${url}&filterObj=[${remainingFilters.substring(1)}]`;
+    window.location.href = url;
   };
+
   function getFilters(filter: Allfilters) {
     switch (filter.filterName) {
       case Constants.LABELS.filterTypes.IS: {
@@ -66,7 +86,7 @@ const FilterData: React.FunctionComponent<UserProps> = ({ props }): JSX.Element 
       <Stack direction="row" spacing={1}>
         {listOfFilters &&
           listOfFilters.map((filter, index) => {
-            return <Chip label={getFilters(filter)} color="info" />;
+            return <Chip label={getFilters(filter)} color="info" onDelete={handleDelete(index)} />;
           })}
         {/* onDelete={handleDelete(index)} */}
       </Stack>
