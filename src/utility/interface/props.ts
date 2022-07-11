@@ -47,6 +47,10 @@ export interface ColumnProps {
 export interface UserProps {
   props: any;
 }
+export interface GraphiqlProps{
+  props: any;
+  drawerOpen:boolean;
+}
 export interface Allfilters {
   filterName: string | null;
   columnName: string | null;

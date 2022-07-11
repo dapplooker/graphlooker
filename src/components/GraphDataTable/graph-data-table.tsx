@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Allfilters, GraphDataTableProps } from './../../utility/interface/props';
+import { Allfilters, GraphDataTableProps,GraphiqlProps } from './../../utility/interface/props';
 import {
   EndpointState,
   EntityState,
@@ -42,7 +42,7 @@ import NoRecords from '../NoRecords/NoRecords';
 import FilterData from '../FilterData/FilterData';
 import GraphiqlEditor from '../GraphiqlEditor/GraphiqlEditor';
 
-const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteComponentProps<any>> = ({
+const GraphDataTable: React.FunctionComponent< GraphDataTableProps & RouteComponentProps<any>> = ({
   drawerOpen,
   location,
 }) => {
@@ -232,7 +232,7 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
       </div>
      
       <ExportButton rows={rows} />
-     {openEditor ? <GraphiqlEditor props={queryData}/> : 
+     {openEditor ? <GraphiqlEditor props={queryData} drawerOpen={drawerOpen} /> : 
         
       
       <div className="all-graph-data">

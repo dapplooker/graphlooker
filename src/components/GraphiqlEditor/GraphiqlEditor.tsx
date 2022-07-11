@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { UserProps } from '../../utility/interface/props';
+import { GraphiqlProps } from '../../utility/interface/props';
 import GraphiQL from 'graphiql';
 import './GraphiqlEditor.scss';
 import 'graphiql/graphiql.min.css';
@@ -7,11 +7,10 @@ import Constants from '../../utility/constant';
 import { useSelector } from 'react-redux';
 import { EndpointState } from '../../utility/redux/state';
 
-const link = 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2';
-
-
 const buttonDisable = document.getElementsByClassName('toolbar-button');
-const GraphiqlEditor: React.FunctionComponent<UserProps> = ({ props }): JSX.Element => {
+
+const GraphiqlEditor: React.FunctionComponent<GraphiqlProps> = ({ props,drawerOpen }):  JSX.Element=> {
+
 const endpoint = useSelector((state: EndpointState) => state.graphEndpoint.endpoint);
 
 
@@ -30,7 +29,7 @@ const endpoint = useSelector((state: EndpointState) => state.graphEndpoint.endpo
 
   return (
     <>
-      <div className="graphiQLEditor">
+      <div className={drawerOpen ? "graphiQLEditor" :"graphiQLEditor-drawer-open"}>
         <GraphiQL
           fetcher={async (graphQLParams) => {
             const data = await fetch(endpoint, {
@@ -45,7 +44,6 @@ const endpoint = useSelector((state: EndpointState) => state.graphEndpoint.endpo
 
             return data.json().catch(() => data.text());
           }}
-          // beforeTopBarContent={<Logo width={'60px'} height={'50px'} />}
           editorTheme={'dracula'}
           readOnly={true}
           defaultVariableEditorOpen={false}
