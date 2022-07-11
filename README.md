@@ -1,77 +1,81 @@
-# What is GraphLooker? 🧠
+# What is GraphLooker? ⚡
 
-Currently, there is no generic subgraph frontend Dapp to explore, browse and filter on subgraphs data. Our mission is empower Graph different actors like indexers, delegators, curators, users to easily understand subgraph data. The tool helps indexers, delegators, curators and TheGraph users easily browse subgraph data, download data to CSV and perform simple to complex operations like sorting, filtering with simplest of UX.
+GraphLooker is real-time subgraph explorer and visualizer. The Dapp helps indexers, delegators, curators and TheGraph users to easily browse subgraph data, download data to CSV and perform simple to complex operations like sorting, filtering with simplest of UX. Using the Dapp you can `look deeper` into your subgraphs.
 
-# Target Audience 👑 🏫
+# Target Audience 👑
 
-- The Dapp is specially helpful for non tech users who can do simple to complex operations on network subgraphs just from UI.
-- Users can download subgraph data in CSV.
-- Delegators/Curators/Subgraph developers who are relatively less technical can browse and explore subgraph data from the UI.
+- The Dapp is specially helpful for non tech users who can do simple to complex operations on subgraphs just from UI.
+- Users can filter and download subgraph data in CSV.
+- Delegators/Curators/Subgraph developers who are relatively less technical can browse and filter subgraph data from the UI.
 
-# Features ❤️ ⚡
+# Features ❤️
 
 - Browse and explore subgraph entity data in tabular form in UI.
 - Export the subgraph data to CSV.
-- Sort any particular column in ascending/descending order
-- Apply filters on entity attribute data e g. Display latest 100 Uniswap records
-- Pagination feature that enables user to focus on the particular range of datasets
-- Share sorted, filtered data views using public url
-- Applying filter based on the type of the data of that particular column. Different type of filters are supported based on data type of attribute.
+- Support of subgraph studio.
+- Sort any particular column in ascending/descending order.
+- Apply filters on entity attribute data e g. Display latest 100 Uniswap records.
+- Pagination feature that enables user to focus on the particular range of datasets.
+- You can share sorted, filtered subgraph data views using public url.
+- Applying filter based on the type of the data of that particular column. Different type of filters are supported based on data type of entity attribute.
 - Switch theme feature that enables users to select their own theme either dark or light according to their convenience.
 
-Checkout https://graphlooker.com/ and let us know your views and valuable feedbacks.
+The Dapp is live at https://graphlooker.com/
 
-## How to fork subgraph-explorer
+## Steps to Run GraphLooker
+Follow below steps to run GraphLooker:
 
-Step1:-
+### Open git bash or terminal
 
-Open git bash or terminal
-
-```
-$ git clone https://github.com/dapplooker/subgraph-explorer.git
-```
-
-Step2:-
-
-Now move into the project
-
-```
-$ cd subgraph-explorer
+```sh
+$ git clone git@github.com:dapplooker/graphlooker.git
 ```
 
-Step3:-
+### Switch your path to graphlooker project
 
-Install the dependencies
-
+```sh
+$ cd graphlooker
 ```
+
+### Install the dependencies
+
+```sh
 $ npm install
 ```
 
-### Comman to run application in local
-
-```
+### Start server
+There should not be any other process running on port 3000.
+```sh
 $ npm start
 ```
 
-Application will be hosted on http://localhost:3000/
+Application will be running on http://localhost:3000/
 
-### Command TO create Production build
-
-```
+### Create Production build
+In case you are looking to host on production, create production build using below command.
+```sh
 $ npm run build
 ```
 
-## SETTING UP OF THE ENVIORNMENT
+### Hosting on Production
 
-Create .env file in the subgraph-explorer folder that includes:
+Open `.env` file in the graphlooker folder. Update below variables with production host.
 
 ```
-REACT_APP_BASE_URL_DEVELOPMENT = 'http://localhost:3000/explore?'
-
-REACT_APP_BASE_URL_PRODUCTION = 'https://cosmodapp.com/explore?'
-(`you can change the domain according to your need`)
-
-REACT_APP_ADDRESS_URL = 'https://etherscan.io/address'
-
-REACT_APP_TNX_URL = 'https://etherscan.io/tx/'
+REACT_APP_BASE_URL_PRODUCTION = 'https://graphlooker.com'
 ```
+
+### How to Use 
+
+Below is the documentation for reference purpose.
+```
+Hosted Subgraphs :
+```
+Step by step guide:-https://www.notion.so/dapplooker/What-do-we-do-73aa1d887b54430e9e69a590f4668638
+
+```
+Subgraph Studio :
+```
+Step by step guide :- https://www.notion.so/dapplooker/GraphLooker-Documentation-07bc3adf176b488ca23059ddbd41387f
+
+

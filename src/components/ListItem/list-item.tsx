@@ -23,7 +23,7 @@ const ListItem: React.FunctionComponent<ListItemProps & RouteComponentProps<any>
   const urlLabels = Constants.LABELS.commonUrls;
   const handleEntityChange = (entity: string) => {
     const URI = encodeURIComponent(endpoint);
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}&th=${theme}`;
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${entity}`;
   };
   return (
     <React.Fragment>

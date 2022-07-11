@@ -6,6 +6,7 @@ import {
   AttributesState,
   QueryDataState,
   GraphNameState,
+  ThemeState,
   graphiqlEditorState,
 } from '../../utility/redux/state';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
@@ -55,7 +56,7 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
   const subgraphNetworkName = useSelector((state: GraphNameState) => state.graphName.subgraphName);
   selectedEntity = useSelector((state: EntityState) => state.selectedEntity.entity);
   let listOfattributes = useSelector((state: AttributesState) => state.allAttributes.attributes);
-  const theme = parsed.th;
+  const theme = useSelector((state: ThemeState) => state.themeSelector.theme);
   let listOfFilters = String(parsed.filterObj);
   const dispatch = useDispatch();
    
@@ -151,7 +152,7 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
     let filtersInStringify = Utility.getAllFilters(null, null, null, listOfFilters);
     if (isNextDisable) return;
     const URI = encodeURIComponent(endpoint);
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&p=${
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&p=${
       pageNumber + 1
     }&filterObj=${filtersInStringify}`;
   };
@@ -159,7 +160,7 @@ const GraphDataTable: React.FunctionComponent<GraphDataTableProps & RouteCompone
     if (isPrevDisable) return;
     let filtersInStringify = Utility.getAllFilters(null, null, null, listOfFilters);
     const URI = encodeURIComponent(endpoint);
-    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&th=${theme}&p=${
+    window.location.href = `${urlLabels.BASE_URL}uri=${URI}&e=${selectedEntity}&p=${
       pageNumber - 1
     }&filterObj=${filtersInStringify}`;
   };

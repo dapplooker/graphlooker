@@ -10,6 +10,7 @@ export default class Constants {
     MEDIUM_BLOG: 'https://dapplooker.medium.com/',
     TWITTER: 'https://twitter.com/dapplooker',
     DAPPLOOKER: 'https://dapplooker.com',
+    GRAPHLOOKER: 'https://www.notion.so/dapplooker/GraphLooker-07bc3adf176b488ca23059ddbd41387f',
   };
   public static FILTERLABELS = {
     dataTypeLabels: {
@@ -101,7 +102,7 @@ export default class Constants {
       DOWNLOAD: 'Download to CSV',
       SORT_ASC: 'Sort Ascending',
       SORT_DESC: 'Sort Descending',
-      DESC_TITLE: 'GraphLooker - Real-time Subgraph Explorer & Visualizer',
+      DESC_TITLE: 'Real-time Subgraph Explorer & Visualizer',
       ENTITY_REFERENCE: 'This column is a reference of',
       NULL: 'null',
       DOUBLE_QUOTES: '"',
@@ -117,14 +118,14 @@ export default class Constants {
       DAPPLOOKER: 'DappLooker',
       TEAM: 'team.',
       NULL_VALUE: 'Null value resolved',
+      GRAPH_HEADING: 'SUBGRAPH STUDIO',
+      MY_THEME: 'mytheme',
     },
     commonUrls: {
       BASE_URL:
         process.env.NODE_ENV === 'development'
-          ? process.env.REACT_APP_BASE_URL_DEVELOPMENT
-          : process.env.REACT_APP_BASE_URL_PRODUCTION,
-      ADDRESS_URL: process.env.REACT_APP_ADDRESS_URL,
-      TNX_URL: process.env.REACT_APP_TNX_URL,
+          ? `${process.env.REACT_APP_BASE_URL_DEVELOPMENT}explore?`
+          : `${process.env.REACT_APP_BASE_URL_PRODUCTION}explore?`,
     },
     exportLabels: {
       DWNLD_STARTED: 'Download Completed, you can close the tab.',

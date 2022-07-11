@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.e0ae8ec5.css",
-    "main.js": "/static/js/main.f87cf713.js",
+    "main.css": "/static/css/main.27c63340.css",
+    "main.js": "/static/js/main.d5349ded.js",
     "static/js/787.4baa31f8.chunk.js": "/static/js/787.4baa31f8.chunk.js",
     "static/media/graph-protocol.svg": "/static/media/graph-protocol.abe4f27c4dfc96f78794c291c755c386.svg",
-    "static/media/twitter.svg": "/static/media/twitter.377862e352c63b8a9d922deb020f6e89.svg",
     "index.html": "/index.html",
+    "static/media/twitter.svg": "/static/media/twitter.377862e352c63b8a9d922deb020f6e89.svg",
+    "static/media/documentation.svg": "/static/media/documentation.8efe375627edb26a1003b235c01dce2e.svg",
     "static/media/discord.svg": "/static/media/discord.91cddd1217cc05efc9b46c5b8492586c.svg",
     "static/media/github.svg": "/static/media/github.3cffb315a27d1de0c48e468ee2a6dd18.svg",
     "static/media/telegram.svg": "/static/media/telegram.937b374f4f03cd1392fe7e98c6387a53.svg",
-    "main.e0ae8ec5.css.map": "/static/css/main.e0ae8ec5.css.map",
-    "main.f87cf713.js.map": "/static/js/main.f87cf713.js.map",
+    "main.27c63340.css.map": "/static/css/main.27c63340.css.map",
+    "main.d5349ded.js.map": "/static/js/main.d5349ded.js.map",
     "787.4baa31f8.chunk.js.map": "/static/js/787.4baa31f8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e0ae8ec5.css",
-    "static/js/main.f87cf713.js"
+    "static/css/main.27c63340.css",
+    "static/js/main.d5349ded.js"
   ]
 }

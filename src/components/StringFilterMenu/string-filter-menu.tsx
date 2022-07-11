@@ -31,7 +31,7 @@ const StringFilterMenu: React.FunctionComponent<
   };
   return (
     <>
-      <MenuItem>
+      <MenuItem onKeyDown={(e) => e.stopPropagation()}>
         <Select
           value={selectStringMenu}
           onChange={handleChangeString}
@@ -41,6 +41,7 @@ const StringFilterMenu: React.FunctionComponent<
         >
           {stringFilter.map((item, i) => (
             <MenuItem
+              onKeyDown={(e) => e.stopPropagation()}
               value={item.menuItem}
               key={i}
               onClick={() => setOptionSelected(item.menuValue)}
@@ -50,7 +51,7 @@ const StringFilterMenu: React.FunctionComponent<
           ))}
         </Select>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onKeyDown={(e) => e.stopPropagation()}>
         {selectStringMenu === filterOptionLabel.IS_EMPTY ||
         selectStringMenu === filterOptionLabel.NOT_EMPTY ? (
           label.EMPTY
@@ -68,7 +69,7 @@ const StringFilterMenu: React.FunctionComponent<
         )}
       </MenuItem>
       <Divider sx={{ my: 0.5 }} />
-      <MenuItem>
+      <MenuItem onKeyDown={(e) => e.stopPropagation()}>
         <Button
           variant="contained"
           className="update-filter-button"

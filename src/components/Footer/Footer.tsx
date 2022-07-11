@@ -2,6 +2,7 @@ import React from 'react';
 import './footer.scss';
 import { ReactComponent as DiscordSVG } from '../../svg/discord.svg';
 import { ReactComponent as TwitterSVG } from '../../svg/twitter.svg';
+import { ReactComponent as DocumentationSVG } from '../../svg/documentation.svg';
 import { ReactComponent as MediumSVG } from '../../svg/medium.svg';
 import { ReactComponent as TelegramSVG } from '../../svg/telegram.svg';
 import { ReactComponent as GithubSVG } from '../../svg/github.svg';
@@ -53,6 +54,11 @@ const Footer: React.FunctionComponent<any> = () => {
           <div className="icon">
             <a href={Constants.URL.GITHUB} target="_blank" rel="noreferrer">
               <GithubSVG />
+            </a>
+          </div>
+          <div className="icon">
+            <a href={Constants.URL.GRAPHLOOKER} target="_blank" rel="noreferrer">
+              <DocumentationSVG />
             </a>
           </div>
 

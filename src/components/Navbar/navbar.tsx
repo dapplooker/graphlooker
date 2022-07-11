@@ -9,16 +9,14 @@ import { ThemeState } from './../../utility/redux/state';
 import './navbar.scss';
 import { toggleTheme } from '../../redux/actions/theme-action';
 import Constants from '../../utility/constant';
+
 const Navbar: React.FunctionComponent<{}> = (props) => {
+  const theme = useSelector((state: ThemeState) => state.themeSelector.theme);
   const dispatch = useDispatch();
   const label = Constants.LABELS.commonLables;
-  const theme = useSelector((state: ThemeState) => state.themeSelector.theme);
-  const handleToggleTheme = () => {
-    const newTheme =
-      theme === label.LIGHT_THEME_LABEL ? label.DARK_THEME_LABEL : label.LIGHT_THEME_LABEL;
-    dispatch(toggleTheme(newTheme));
+  const changetheme = () => {
+    dispatch(toggleTheme(theme));
   };
-
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -61,7 +59,7 @@ const Navbar: React.FunctionComponent<{}> = (props) => {
                   <img className="beta-icon" src="/images/beta.png" alt="beta version" />
                 </div>
               </div> */}
-              <div className="theme-icon" onClick={handleToggleTheme}>
+              <div className="theme-icon" onClick={changetheme}>
                 {theme === label.LIGHT_THEME_LABEL ? <DarkModeIcon /> : <LightModeIcon />}
               </div>
             </div>

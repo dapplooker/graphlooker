@@ -1,21 +1,12 @@
-import { EndpointActionTypes, GraphiqlEditorActionTypes } from "../../utility/redux/action-types";
+import { EndpointActionTypes } from '../../utility/redux/action-types';
 
-
-//Action for the state of the graphiQL Editor 
-export const setGraphiQlEditor=(editorState:boolean)=>{
+// Action for the name of  the sub-graph
+export const setSubgraphName = (subgraphName: string) => {
   return {
-    type:GraphiqlEditorActionTypes.SET_EDITOR_STATE,
-    payload:editorState,
-  }
-}
-
-// Action for the name of the sub-graph
-export const setSubgraphName=(subgraphName:string)=>{
-  return {
-    type:EndpointActionTypes.SET_SUBGRAPH_NETWORKNAME,
-    payload:subgraphName,
-  }
-  }
+    type: EndpointActionTypes.SET_SUBGRAPH_NETWORKNAME,
+    payload: subgraphName,
+  };
+};
 export const setGraphEndpoint = (endpoint: string) => {
   return {
     type: EndpointActionTypes.SET_ENDPOINT,
@@ -30,9 +21,7 @@ export const setGraphEntity = (entity: string) => {
   };
 };
 
-export const setGraphAttributes = (
-  entity: { name: string; type: string; typeName: string }[]
-) => {
+export const setGraphAttributes = (entity: { name: string; type: string; typeName: string }[]) => {
   return {
     type: EndpointActionTypes.SET_ATTRIBUTES,
     payload: entity,

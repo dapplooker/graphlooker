@@ -9,8 +9,27 @@ var listOfFilters: Allfilters[] = [];
 const FilterData: React.FunctionComponent<UserProps> = ({ props }): JSX.Element => {
   listOfFilters = props && JSON.parse(props);
 
-  const handleDelete = (index: number) => () => {
-    listOfFilters.splice(index);
+  const removeFilter = (index: number) => () => {
+    //first removed the clicked filter
+    listOfFilters.splice(index, 1);
+    //logic of triming the url
+    let url = window.location.href;
+    let indexOfFilter = url.indexOf('filterObj');
+    url = url.substring(0, indexOfFilter - 1);
+    //if the removed filter was the last filter left in the array
+    if (listOfFilters.length === 0) {
+      window.location.href = url;
+      return;
+    }
+    //making url from new filters array
+    let remainingFilters = '';
+    function stringConverter(item: any) {
+      const itemToString = JSON.stringify(item);
+      remainingFilters = remainingFilters + ',' + itemToString;
+    }
+    listOfFilters.forEach(stringConverter);
+    url = `${url}&filterObj=[${remainingFilters.substring(1)}]`;
+    window.location.href = url;
   };
   function getFilters(filter: Allfilters) {
     switch (filter.filterName) {
@@ -66,7 +85,7 @@ const FilterData: React.FunctionComponent<UserProps> = ({ props }): JSX.Element 
       <Stack direction="row" spacing={1}>
         {listOfFilters &&
           listOfFilters.map((filter, index) => {
-            return <Chip label={getFilters(filter)} color="info" />;
+            return <Chip label={getFilters(filter)} color="info" onDelete={removeFilter(index)} />;
           })}
         {/* onDelete={handleDelete(index)} */}
       </Stack>

@@ -31,7 +31,7 @@ import Constants from '../../utility/constant';
 import Loader from '../Loader/loader';
 import { Tooltip } from '@mui/material';
 import ErrorMessage from '../ErrorMessage/error-message';
-import { LoadingState } from '../../utility/redux/state';
+import { LoadingState, ThemeState } from '../../utility/redux/state';
 import humanizeString from 'humanize-string';
 import Footer from '../Footer/Footer';
 
@@ -56,14 +56,15 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
   const urlLabels = Constants.LABELS.commonUrls;
   const dispatch = useDispatch();
   const parsed = queryString.parse(location.search);
-  let theme: any = parsed.th;
   let graphName: string | any = parsed.uri?.slice(parsed.uri?.lastIndexOf('/') + 1);
+  let url: string | any = parsed.uri;
+  let endPoint = new URL(url);
   if (parsed.uri) {
     graphName = humanizeString(graphName)?.toUpperCase();
   }
-  if (theme === label.LIGHT_THEME_LABEL || theme === label.DARK_THEME_LABEL) {
-  } else {
-    theme = label.DARK_THEME_LABEL;
+
+  if (endPoint.host === 'gateway.thegraph.com') {
+    graphName = label.GRAPH_HEADING;
   }
 
   React.useEffect(() => {
@@ -75,11 +76,7 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
       dispatch(setGraphEndpoint(endpoint));
       return;
     }
-    if (parsed.th !== undefined) {
-      const val =
-        parsed.th === label.LIGHT_THEME_LABEL ? label.DARK_THEME_LABEL : label.LIGHT_THEME_LABEL;
-      dispatch(toggleTheme(val));
-    }
+
     window.location.href = Constants.ROUTES.HOME_ROUTE;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -89,17 +86,14 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
   const { data: deploymentData } = useQuery(queryToGetDeploymentId);
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const loadingScreen = useSelector((state: LoadingState) => state.dataLoading.loading);
-  const handleToggleTheme = () => {
-    const newTheme =
-      theme === label.LIGHT_THEME_LABEL ? label.DARK_THEME_LABEL : label.LIGHT_THEME_LABEL;
-    dispatch(toggleTheme(newTheme));
-    theme = newTheme;
-    window.location.href = `${urlLabels.BASE_URL}uri=${parsed.uri}&e=${parsed.e}&th=${theme}`;
-  };
   const handleToggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
   const { data, error, loading } = useQuery(getAllEntities);
+
+  const changetheme = () => {
+    dispatch(toggleTheme(theme));
+  };
 
   useEffect(() => {
     if (deploymentId.length) {
@@ -114,6 +108,13 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
       context: { clientName: 'subgraph-network' },
     }
   );
+
+  let theme = useSelector((state: ThemeState) => state.themeSelector.theme);
+
+  if (theme === label.LIGHT_THEME_LABEL || theme === label.DARK_THEME_LABEL) {
+  } else {
+    theme = label.DARK_THEME_LABEL;
+  }
 
   // Fetching SubGraphNetwork Name & passing it into global state with redux.
   useEffect(() => {
@@ -255,7 +256,7 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
               <button className="btn-view-query icons" onClick={()=> openEditor ? setOpenEditor(false):setOpenEditor(true)}>View </button>
             </Tooltip>
             <Tooltip title={label.SWITCH_THEME}>
-              <div className="theme-icon" onClick={handleToggleTheme}>
+              <div className="theme-icon" onClick={changetheme}>
                 {theme === label.LIGHT_THEME_LABEL ? <DarkModeIcon /> : <LightModeIcon />}
               </div>
             </Tooltip>
