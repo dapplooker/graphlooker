@@ -1,66 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Real-time Subgraph Explorer & Visualizer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Real-time Subgraph Explorer & Visualizer" />
+    <meta name="twitter:site" content="@dapplooker" />
+    <meta name="twitter:domain" content="https://graphlooker.com" />
+    <meta
+      name="twitter:image"
+      content="https://dapplooker.s3.amazonaws.com/assets/img/GraphLooker_meta_2.png"
+    />
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Real-time Subgraph Explorer & Visualizer" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Real-time Subgraph Explorer & Visualizer" />
-  <meta name="twitter:site" content="@dapplooker" />
-  <meta name="twitter:domain" content="https://graphlooker.com" />
-  <meta name="twitter:image" content="https://dapplooker.s3.amazonaws.com/assets/img/GraphLooker_meta_2.png" />
+    <meta property="og:title" content="GraphLooker | Real-time Subgraph Explorer & Visualizer" />
+    <meta property="og:description" content="Real-time Subgraph Explorer & Visualizer" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://graphlooker.com" />
+    <meta property="og:site_name" content="graphlooker.com" />
+    <meta
+      property="og:image"
+      content="https://dapplooker.s3.amazonaws.com/assets/img/GraphLooker_meta_2.png"
+    />
 
-  <meta property="og:title" content="GraphLooker | Real-time Subgraph Explorer & Visualizer" />
-  <meta property="og:description" content="Real-time Subgraph Explorer & Visualizer" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://graphlooker.com" />
-  <meta property="og:site_name" content="graphlooker.com" />
-  <meta property="og:image" content="https://dapplooker.s3.amazonaws.com/assets/img/GraphLooker_meta_2.png" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
 
-  <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.23.0/theme/dracula.css"
+    />
 
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.23.0/theme/dracula.css" />
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.23.0/theme/solarized.css"
+    />
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link href="https://unpkg.com/graphiql/graphiql.min.css" rel="stylesheet" />
     <script crossorigin src="https://unpkg.com/graphiql/graphiql.min.js"></script>
-    <script
-      crossorigin
-      src="https://unpkg.com/react/umd/react.production.min.js"
-    ></script>
-    <script
-      crossorigin
-      src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
-    ></script>
+    <script crossorigin src="https://unpkg.com/react/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
 
-  <!--
+    <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
 
-  <script>
-    var hostName = window.location.hostname;
-    var hostWithSubdomain = hostName.split('.')[1];
-    var host = 'graphlooker';
-    if (hostName === host || hostWithSubdomain === host) {
-      // Checking hostname
-      var script = document.createElement('script'); // Creating a script tag
-      script.setAttribute('type', 'text/javascript'); // Setting type of script
-      script.setAttribute('defer', '');
-      script.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=UA-197948260-2'); // Setting src URL
-      document.head.appendChild(script); // Loading script under head
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
+    <script>
+      var hostName = window.location.hostname;
+      var hostWithSubdomain = hostName.split('.')[1];
+      var host = 'graphlooker';
+      if (hostName === host || hostWithSubdomain === host) {
+        // Checking hostname
+        var script = document.createElement('script'); // Creating a script tag
+        script.setAttribute('type', 'text/javascript'); // Setting type of script
+        script.setAttribute('defer', '');
+        script.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=UA-197948260-2'); // Setting src URL
+        document.head.appendChild(script); // Loading script under head
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-197948260-2');
       }
-      gtag('js', new Date());
-      gtag('config', 'UA-197948260-2');
-    }
-  </script>
-  <!--
+    </script>
+    <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -69,13 +77,13 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title>Real-time Subgraph Explorer & Visualizer</title>
-</head>
+    <title>Real-time Subgraph Explorer & Visualizer</title>
+  </head>
 
-<body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <!--
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -85,6 +93,5 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-</body>
-
+  </body>
 </html>

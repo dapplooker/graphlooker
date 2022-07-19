@@ -29,7 +29,7 @@ import {
 import DataBoard from '../DataBoard/data-board';
 import Constants from '../../utility/constant';
 import Loader from '../Loader/loader';
-import { Tooltip } from '@mui/material';
+import { makeStyles, Tooltip } from '@mui/material';
 import ErrorMessage from '../ErrorMessage/error-message';
 import { LoadingState, ThemeState } from '../../utility/redux/state';
 import humanizeString from 'humanize-string';
@@ -176,6 +176,7 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
     dispatch(setGraphiQlEditor(openEditor));
   },[openEditor])  
 
+  
   return (
     <>
       {error ? (
@@ -190,7 +191,7 @@ const GraphData: React.FunctionComponent<RouteComponentProps<any>> = ({ location
       {loadingScreen ? <Loader theme={theme} /> : ''}
 
       <div className="card-container" theme-selector={theme}>
-        <AppBar position="fixed" className="app-bar">
+        <AppBar position="fixed" className="app-bar" style={ theme==Constants.LABELS.commonLables.DARK_THEME_LABEL ? { backgroundColor:'black'} : {backgroundColor:'#1e88e5'}}>
           <Toolbar className="toolbar toolbar-padding">
             <div className="menu-container">
               <Box

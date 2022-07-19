@@ -91,6 +91,7 @@ export default class Constants {
       LIGHT_THEME_LABEL: 'light',
       WHITE: 'white',
       BLACK: 'black',
+      BLUE:"blue",
       DARK_THEME_LABEL: 'dark',
       INVALID: 'Not a Valid Address or TransactionHash',
       INCLUDE_TODAY: 'Include today',

@@ -2,9 +2,13 @@
   width: calc(100vw - 310px);
   height: calc(91vh - 76px);
   border-radius: 20px;
+  &-drawer-open{
+  
+    width: 100vw;
+    height: calc(91vh - 76px);
+   
+  }
 }
-.graphiQLEditor-drawer-open{
-  width: 100vw;
-  height: calc(91vh - 76px);
- 
+.graphEditorBackground{
+  background-color: white;
 }
