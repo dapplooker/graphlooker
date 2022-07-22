@@ -9,6 +9,7 @@ import TableChartIcon from '@mui/icons-material/TableChart';
 import { EndpointState, EntityState } from '../../utility/redux/state';
 import Constants from '../../utility/constant';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { noCase } from 'change-case';
 
 const ListItem: React.FunctionComponent<ListItemProps & RouteComponentProps<any>> = ({
   entity,
@@ -35,7 +36,7 @@ const ListItem: React.FunctionComponent<ListItemProps & RouteComponentProps<any>
         >
           <TableChartIcon className="entity-logo"></TableChartIcon>
           <div style={{ display: 'flex', alignItems: 'center' }} className="entity-name">
-            <ListItemText className="list-item-text" primary={entity} />
+            <ListItemText className="list-item-text" primary={noCase(entity)} />
           </div>
         </ListItemButton>
         <Divider sx={{ borderBottomWidth: 0.01 }} color="#00A1FF" />

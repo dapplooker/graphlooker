@@ -123,6 +123,7 @@ export default class Constants {
       NULL_VALUE: 'Null value resolved',
       GRAPH_HEADING: 'SUBGRAPH STUDIO',
       MY_THEME: 'mytheme',
+      BUTTON_TEXT_FOR_EMAIL:'INFORM US',
     },
     commonUrls: {
       BASE_URL:
@@ -232,6 +233,8 @@ export default class Constants {
     UNEXPECTED:
       'Unexpected error encountered, please check if you are entering correct subgraph api endpoint.',
     INVALID: 'Subgraph api endpoint you are entering is invalid or not allowed',
+    MAIL_BODY: 'Hi,I am getting an Error while executing the following query in this URL',
+    MAIL_SUBJECT: 'This Query has been failed !',
   };
 
   public static ROUTES = {
@@ -240,5 +243,8 @@ export default class Constants {
 
   public static LENGTH_OF_STRING = {
     VALUE: 21,
+  };
+  public static CONTACT = {
+    EMAIL: 'help@dapplooker.com',
   };
 }
